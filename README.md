@@ -1,5 +1,5 @@
 # UNIR Q1A0 - Cursos de Preparación
-Este repositorio contiene las notas y ejercicios de los cursos de preparación para el Máster Oficial en Big Data y Visual Analytics de la UNIR (Universidad Internacional de la Rioja).
+Este repositorio contiene las notas y ejercicios de los cursos de preparación para el [Máster Oficial en Big Data y Visual Analytics](https://www.unir.net/ingenieria/master-visual-analytics-big-data/) de la UNIR (Universidad Internacional de la Rioja).
 
 Estos cursos tienen el siguiente contenido:
 - **Curso Experiencia UNIR**
