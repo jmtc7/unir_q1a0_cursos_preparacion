@@ -11,7 +11,7 @@ La evaluación consistirá en:
 - 8 test autocorregibles (0,25 puntos cada uno) con intentos ilimitados.
 
 # 2. Qué es Python?
-Existe una guía de estilo oficial llamada [PEP 8](https://peps.python.org/pep-0008/)  (Python Enhancement Proposal). La [PEP257](https://peps.python.org/pep-0257/) describe cómo deben hacerse las *docstrings*.
+Existe una guía de estilo oficial llamada [PEP 8](https://peps.python.org/pep-0008/)  (Python Enhancement Proposal). La [PEP257](https://peps.python.org/pep-0257/) describe cómo deben hacerse las *docstrings*, aunque el [formato Sphynx](https://www.sphinx-doc.org/en/master/usage/domains/python.html) es algo más detallado y permite documentación automática, por lo que es cada vez más utilizado.
 
 Algunas características de Python son el tipado dinámico (los tipos de las variables no los especifica el usuario), ser un lenguaje multiparadigma (permite programación orientada a objetos, programación imperativa y programación funcional), es interpretado (no compilado, lo que le permite ser multiplataforma) y es extensible (tiene muchos módulos).
 
