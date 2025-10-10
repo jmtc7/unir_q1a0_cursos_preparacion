@@ -103,6 +103,7 @@ np.std(array)  # Desviación estándar: 2.87228
 np.var(array)  # Varianza: 8.25
 ```
 
+**Más información** sobre `NumPy` en su [guía de inicio rápido oficial](https://numpy.org/devdocs/user/quickstart.html).
 
 ## 3. Pandas
 Es una extensión de `NumPy` y se orienta a manipular y analizar datos.
@@ -171,4 +172,9 @@ Otro recurso es aplicar **funciones anónimas/lambda/map** a todos los elementos
 
 Al igual que las series, los dataframes también ofrecen **operaciones estadísticas**, como `dataframe.describe()`, que da información de cuántos valores distintos hay para cada atributo, la media, la desviación estándar, varios percentiles, el valor máximo, etc. Los resultados dependen del tipo de datos almacenados en el dataframe. También podemos aplicar funciones más específicas, las cuales se aplicarán sólo a las columnas compatibles. Por ejemplo, si hacemos `dataframe.median()`, sólo se aplicará a la columna `'edad'`.
 
+
+**Más información** sobre `Pandas` en su [guía de usuario oficial](https://pandas.pydata.org/docs/user_guide/10min.html#min).
+
+
 ## 4. Lectura y Escritura de Ficheros CSV
+Lo más normal no es crear un dataframe desde cero, si no empezar a partir de un conjunto de datos ya existente. Estos pueden estar en bases de datos, o en ficheros XML, JSON o CSV. Este último es el formato más común, por lo que veremos cómo leer la información en ellos y procesarla con `Pandas` y dataframes. Para leer un CSV, podemos utilizar `pd.read_csv('path/to/csv/file.csv')`, lo que generará un dataframe. Para guardar un dataframe en un fichero CSV, utilizamos `dataframe.to_csv('path/to/csv/file.csv')`.
