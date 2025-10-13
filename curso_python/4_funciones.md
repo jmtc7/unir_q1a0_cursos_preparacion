@@ -2,6 +2,8 @@
 
 La sección 4 incluye información básica sobre la creación y uso de funciones, parámetros y documentación, así como el uso de librerías estándar como `os`, `sys`, `pathlib` y `logging`. Sin embargo, en estas notas sólo se incluyen los aspectos más avanzados de esta sección: las funciones lambda y el uso del módulo `logging`.
 
+También incluí algunas notas sobre qué son, cómo funcionan y para qué se usan los **decoradores**, aunque no forma parte del contenido de esta sección en el curso.
+
 ## 1. Funciones Lambda
 Las funciones lambda son funciones simples que se necesitan de forma temporal y se pueden implementar en una sola línea. Su uso principal es ser pasadas como **argumentos a funciones *normales***, como funciones de ordenación o de filtrado, o aplicar una operación a todos los elementos de alguna estrucutra de datos. Algunos ejemplos son:
 
@@ -114,3 +116,52 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.debug("Mensaje de depuración")
 ```
+
+## 3. Decoradores
+Otro aspecto avanzado de Python son los **decoradores**. Son una forma de cambiar el comportamiento de funciones o métodos sin cambiar el código. En Python, todo son objetos, incluyendo las funciones, por lo que podemos pasarlas como argumentos a otras funciones o constructores y devolverlas como valor de retorno. Los decoradores permiten automatizar este tipo de funcionamiento. En el siguiente código, cada vez que llamemos a la función `f()`, Python va a llamara `f1()` usando `f` como argumento:
+```python
+def f1(f):
+  def wrapper(*args, **kwargs):  # Necesitamos *args y **kwargs por si acaso `f()` toma argumentos
+    print('Comienzo')
+    ret_val = f(*args, **kwargs)
+    print('Final')
+    return ret_val  # Necesitamos manejar el return explícitamente por si acaso `f()` devuelve algo
+
+  return wrapper
+
+@f1
+def f():
+  print('Hola')
+
+@f1  # El mismo decorador se puede usar para varias funciones
+def sum(a, b=9):
+  return a+b
+
+f()  # Imprimirá 'Comienzo\nHola\nFinal'!
+print(sum(1, b=9))  # Imprimirá 'Comienzo\nFinal\n10'!
+```
+
+Uno de los usos más comunes de los decoradores es **medir el tiempo de ejecución** de una función:
+```python
+import time
+
+def timer(func)
+  def wrapper(*args, **kwargs):
+    comienzo = time.time()
+    ret_val = f(*args, **kwargs)
+    final = time.time()
+    print(f'Tiempo de ejecución: {final-comienzo} segundos')
+    return ret_val
+
+  return wrapper
+
+@timer
+def run():
+  print('Pausando...')
+  time.sleep(2)
+  print('Despertado!')
+
+run()  # Imprimirá 'Pausando...\nDespertado!\nTiempo de ejecución: 2.001 segundos' (aproximadamente)
+```
+
+Otras aplicaciones incluyen *loggear* las llamadas a cada función y los argumentos utilizados, 

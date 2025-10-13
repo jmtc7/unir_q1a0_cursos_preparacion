@@ -1,26 +1,32 @@
 # Curso de Iniciación a Python Orientado a Datos
 Este curso está dividido en las siguientes secciones:
-  1. **Introducción**
+  1. [**Introducción**](1_introduccion.md)
   2. **Primeros Conceptos***
      1. Identificadores, palabras reservadas, comentarios y sangría/indentación
      2. Variables, constantes, tipos de datos y operadores
   3. **Programación Básica***
      1. Listas, tuplas, diccionarios y conjuntos
      2. Expresiones condicionales, bucles e iteradores
-  4. **Funciones***
+  4. [**Funciones****](4_funciones.md)
      1. Definición, argumentos, retornos y documentación
-     2. Funciones básicas de los módulos *math*, *sys*, *os* y *random*
+     2. Funciones básicas de los módulos *math*, *sys*, *os*, *random* y *logging*
      3. Funciones anónimas/lambda
-  5. **Organización del Código***
+     4. Decoradores
+  5. [**Organización del Código****](5_clases.md)
      1. Creación, documentación y uso de módulos y paquetes
      2. Programación orientada a objetos (POO): Clases, atributos, métodos y herencia
-  6. **Aspectos Avanzados**
+  6. [**Aspectos Avanzados**](6_aspectos_avanzados.md)
      1. Expresiones regulares (RegEx)
      2. Gestión de errores
      3. Compresión de listas, diccionarios y conjuntos
-  7. **Análisis de Datos**
-  8. **Visualización de Datos**
+  7. [**Análisis de Datos**](7_analisis_datos.md)
+     1. NumPy: Arrays, matrices y funciones
+     2. Pandas: Series, dataframes y funciones
+     3. Lectura, procesado y escritura de ficheros CSV
+  8. [**Visualización de Datos**](8_visualizacion_datos.md)
 
-> Las secciones marcadas con *\** no tienen notas debido a que el contenido estaba previamente adquirido.
+> \* No tiene notas debido a que el contenido estaba previamente adquirido.
+> 
+> ** Tiene notas parciales o extendidas con respecto al contenido del curso.
 
-Cada sección tiene un fichero Markdown (\*.md) asociado que contiene las notas relativas a ella. También existe una carpeta `actividades/` que contienen los ejercicios prácticos realizados y entregados para este curso.
+Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. También existe una carpeta `actividades/` que contienen los ejercicios prácticos realizados y entregados para este curso.
