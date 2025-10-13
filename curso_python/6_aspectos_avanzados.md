@@ -4,7 +4,7 @@
 En esta sección se verán conceptos avanzados de la programación con Python como son:
 - Expresiones regulares (RegEx) para buscar y modificar patrones en texto
 - Gestión de errores
-- Compresión para crear estructuras de datos
+- Comprensión para crear estructuras de datos
 
 ## 2. Expresiones Regulares (RegEx)
 Las expresiones regulares son una secuencia de caracteres con otros caracteres especiales que nos permiten definir y buscar patrones de texto. Para usarlas, se necesita importar el módulo `re`. Algunas de las funciones más útiles son:
@@ -60,8 +60,26 @@ Más información sobre las expresiones regulares puede encontrarse [aquí](http
 
 
 ## 3. Gestión de Errores
+Python favorece el estilo **EAFP** (más fácil pedir perdón que permiso) sobre el estilo **LBYL** (*look Before You Leap* - mira antes de saltar). Ejemplos de ambas serían:
+```python
+# LBYL (verificamos si podemos hacer algo antes de hacerlo)
+if "clave" in diccionario:
+    valor = diccionario["clave"]
+else:
+    valor = valor_predeterminado
+
+# Intentar hacer algo y manejar excepciones si ocurren
+try:
+    valor = diccionario["clave"]
+except KeyError:
+    valor = valor_predeterminado
+```
 
 Al ser un lenguaje interpretado, es relativamente normal que aparezcan errores en tiempo de ejecución. Los **tipos de errores** más comunes son:
+- **Errores de interrupción** (`KeyboardInterrupt`): Cuando el usuario interrumpe la ejecución con `Ctrl+C`.
+- **Errores de división por cero** (`ZeroDivisionError`): Cuando se intenta dividir por cero.
+- **Errores de valor** (`ValueError`): Cuando una función recibe un argumento del tipo correcto pero con un valor inapropiado.
+- **Errores de archivo no encontrado** (`FileNotFoundError`): Al intentar acceder a un archivo que no existe.
 - **Errores de tipo** (`TypeError`): Cuando no podemos realizar una operación porque el tipo de datos de alguno de los elementos no es válido. Por ejemplo, si intentamos sumar un número con un texto.
 - **Errores de sintaxis** (`SyntaxError`): Cuando una sentencia o instrucción no está bien escrita. Por ejemplo, si falta cerrar un paréntesis.
 - **Errores de nombre** (`NameError`): Cuando llamamos a un identificador desconocido para Python. Por ejemplo, si intentamos utilizar una variable o función que no existe (o con algún error tipográfico en su nombre).
@@ -92,9 +110,9 @@ try:
 except: 
   print('No existe la posición solicitada')
 else:
-  print('No ha habido ningún error')
+  print('No ha habido ningún error')  # Se ejecuta si no hay errores
 finally:
-  print('Fin del bloque try-except')
+  print('Fin del bloque try-except')  # Se ejecuta haya o no haya errores
 ```
 
 ### 3.1. Lanzamiento de errores
@@ -115,7 +133,7 @@ except:
 Puedes encontrar **más información** sobre los errores y las excepciones en la [documentación oficial de Python](https://docs.python.org/3/tutorial/errors.html).
 
 
-## 4. Compresión de Estructuras de Datos
+## 4. Comprensión de Estructuras de Datos
 Es una forma de crear listas, diccionarios o conjuntos donde cada elemento es el resultado de una operación. Por ejemplo, para crear una `lista` que almacene los cuadrados de los números del 1 al 10 podemos hacer `resultado = [i**2 for i in range(1, 11)]` y obtendremos lo mismo que haciendo:
 
 ```python
@@ -131,4 +149,21 @@ También se puede aplicar el mismo mecanismo **a diccionarios y a conjuntos** ut
 ```python
 mi_diccionario = {i: i**2 for i in range(1, 11) if i%2 = 0}
 mi_conjunto = {i**2 for i in range(1, 11) if i%2 = 0}
+```
+
+Es posible utilizar **comprensiones anidadas**, y siguen siendo más óptimas que hacer bucles tradicionales, pero reducen la legibilidad del código y dificultan el *debugging*, por lo que se recomienda no acumular más de dos niveles. Una alternativa que suele resolver esta necesidad es utilizar **funciones auxiliares**.
+
+## 5. Generadores
+Los generadores son un tipo de función especial en Python que en vez de utilizar `return` utilizan `yield`, lo que provoca que no se ejecuten en su totalidad y devuelvan un valor, sino que se ejecuten hasta cierto punto (hasta cada `yield`) y continúen la ejecución más adelante (normalmente porque se usan dentro de un bucle o se utiliza la función `next()`):
+
+```python
+def contador_simple():
+    print("Iniciando contador")
+    yield 1
+    print("Continuando")
+    yield 2
+    print("Generador terminado")
+
+for valor in contador_simple():
+    print(f"Valor: {valor}")  # Imprimirá 'Iniciando contador\nValor: 1\nContinuando\nValor: 2\nGenerador terminado'
 ```

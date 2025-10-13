@@ -1,5 +1,4 @@
 # Funciones Lambda y Logging
-
 La sección 4 incluye información básica sobre la creación y uso de funciones, parámetros y documentación, así como el uso de librerías estándar como `os`, `sys`, `pathlib` y `logging`. Sin embargo, en estas notas sólo se incluyen los aspectos más avanzados de esta sección: las funciones lambda y el uso del módulo `logging`.
 
 También incluí algunas notas sobre qué son, cómo funcionan y para qué se usan los **decoradores**, aunque no forma parte del contenido de esta sección en el curso.
@@ -26,6 +25,7 @@ sorted_stuff = sorted(numbers)  # [-10, -1, 1, 3, 5, 10]
 sorted_numbers_absolute = sorted(numbers, key=lambda x: abs(x))  # [1, -1, 3, 5, 10, -10]
 ```
 
+> NOTA: Las comprensiones de listas (mostradas en la sección 6 de este curso) son una alternativa más moderna y eficiente a `map()` y `filter()`.
 
 ## 2. Uso del Módulo *Logging*
 Existen varios **niveles de *logging***, según la importancia o cuán crítica sea la información a transmitir:
