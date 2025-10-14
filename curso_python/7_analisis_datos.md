@@ -14,9 +14,9 @@ En este tema, describiremos las principales funcionalidades de los dos módulos 
 Es un módulo de Python orientado a librerías científicas. Proporciona nuevas estructuras de datos y métodos para trabajar con ellas.
 
 ### 2.1. Arrays y Matrices
-Los ***arrays*** almacenan una secuencia de valores del mismo tipo. Muy similares a las listas de Python, pero más rápidos si se utiliza el mismo tipo en sus elementos. Es posible utilizar tipos distintos, pero sus métodos pueden dar errores. Podemos crear un *array* haciendo `array = np.array([1, 2, 3, 4])`. Para acceder al segundo elemento, usamos índices (igual que con las listas de Python), como `array[2]`, que devolvería `3`.
+Los ***arrays*** almacenan una secuencia de valores del mismo tipo. Muy similares a las listas de Python, pero más rápidos si se utiliza el mismo tipo en sus elementos. También utilizan bloques contiguos de memoria, lo que les hace más eficientes. Es posible utilizar tipos distintos, pero sus métodos pueden dar errores. Podemos crear un *array* haciendo `array = np.array([1, 2, 3, 4])`. Para acceder al segundo elemento, usamos índices (igual que con las listas de Python), como `array[2]`, que devolvería `3`. También podemos especificar el tipo de datos utilizando el argumento `dtype` o crear arrays vacíos o llenos de ceros o unos con `np.empty()`, `np.zeros()` o `np.ones()`, respectivamente. Otra opción es usar algo como `np.full(5, 7)` para crear un array con cinco sietes.
 
-Las ***matrices***  son *arrays* con más dimensiones, aunque lo más común es que tenga dos. Se inicializan (y se comportan) como si fuesen listas de listas: `matriz = np.array([[1, 2, 3], [4, 5, 6]])`. **IMPORTANTE**: Si todas las filas NO tienen la misma longitud, se creará un array de listas en vez de una matriz.
+Las ***matrices***  son *arrays* con más dimensiones, aunque lo más común es que tenga dos. Se inicializan (y se comportan) como si fuesen listas de listas: `matriz = np.array([[1, 2, 3], [4, 5, 6]])`. **IMPORTANTE**: Si todas las filas NO tienen la misma longitud, se creará un array de listas en vez de una matriz. Si queremos crear matrices identidad, podemos utilizar `np.eye(3)`, que creará una matriz identidad 3x3. Para matrices diagonales, existe `np.diag()`.
 
 Si comparamos la memoria que ocupa una lista y un array de o el tiempo que se tarda en realizar operaciones con ellos, vemos la diferencia en eficiencia:
 
@@ -54,7 +54,32 @@ final = time.time()
 print(final - comienzo)  # 0.005764 -> Menos del 10% que con listas
 ```
 
-### 2.2. Funciones Universales
+Otra función útil de NumPy es la función `np.arange()`, que funciona igual que la `range()` nativa de Python, pero devuelve NumPy arrays y permite usar decimales. `np.linspace()` es parecida, pero en lugar de especificar el paso, se elige cuántos elementos queremos generar (muy útil para generar coordenadas). `np.logspace()` es igual pero generará muestras logarítmicas.
+
+Con `np.random.random()` generamos números aleatorios entre 0 y 1. También podemos configurar un **generador de estructuras aleatorias** con `rng = np.random.default_rng(seed)`. Una vez creado, esto permite generar conjuntos:
+- `rng.random(5)`: Array de 5 números aleatorios entre 0 y 1.
+- `rng.random((2, 3))`: Matriz de 2 filas y 3 columnas con números aleatorios entre 0 y 1.
+- `rng.uniform(10, 20, size=5)`: Array de 5 números float aleatorios entre 10 y 20.
+- `rng.integers(1, 7, size=10)`: Array de 10 números enteros aleatorios entre 1 y 7.
+- `rng.uniform(-10, 10, size=(100, 2))`: Matriz de 100 filas y 2 columnas con números float aleatorios entre -10 y 10.
+- `rng.normal(size=5)`: Array de 5 números aleatorios sampleados con probabilidad gaussiana (media 0 y desviación 1).
+- `rng.normal(loc=100, scale=15, size=10)`: Array de 10 números aleatorios sampleados con probabilidad gaussiana (media 100 y desviación 15).
+- Otras distribuciones, como binomial, de poisson, exponencial, multivariante, etc.
+
+También es posible seleccionar N elementos aleatorios de un array con `rng.choice(elementos, size=n_elecciones)` (añadir `replace=False` para que cada elemento se elija una única vez) o permutaciones con `rng.permutation(elementos)`. También puedes hacer `rng.shuffle(elementos)` para modificar `elementos` directamente, sin crear un nuevo array.
+
+Algunos **atributos importantes** a conocer son:
+- `array.shape`: Tupla con la forma del array. Para 1D será algo como `(5,)` (5 elementos), para 2D `(3, 2)` (3 filas y 2 columnas), para 3D `(4, 3, 2)` (4 *bloques* de 3 filas y 2 columnas cada uno), etc.
+- `array.ndim`: Número de dimensiones del array.
+- `array.size`: Número de elementos en el array, independientemente de su estructura. Tanto un array unidimensional con 4 elementos como una matriz 2x2 devolverán 4.
+- `array.dtype`: Tipo de los elementos del array (uint8, int16, int64, float64, bool, etc.).
+- `array.itemsize`: Tamaño en bytes de cada elemento del array.
+- `array.nbytes`: Tamaño en bytes de todo el array. Es equivalente a hacer `array.itemsize * array.size`.
+- `matrix.T`: Devuelve la matriz transpuesta, haciendo que las columnas sean las nuevas filas y viceversa.
+
+Como último detalle, es posible utilizar **indexación booleana**, lo que permite aplicar filtros de forma muy rápida. Consiste en algo así: `datos_filtrados = datos[datos < 10]`, lo que construiría un array `datos_filtrados` sólo con aquellos datos inferiores a 10. Dado que se puede utilizar sin necesidad de crear un nuevo array (por ejemplo, como generador en un bucle `for`), puede ser mucho más eficiente en el uso de la memoria y recursos computacionales.
+
+### 2.2. Funciones Universales (ufuncts)
 Son aquellas que se aplican a todos los elementos de un array. Si se hacen con dos arrays, se aplicará elemento por elemento entre ambos (es necesario que ambos tengan el mismo tamaño). Las más importantes son:
 
 ```python
@@ -75,12 +100,12 @@ np.gcd(array1, array2)        # Máximo común divisor: np.array([2, 1, 5])
 np.lcm(array1, array2)        # Mínimo común múltiplo: np.array([2, 12, 10])
 
 # Funciones de comparación
-np.greater(array1, array2)  # Verifica si los elementos del array1 son MAYORES que los del 2: np.array([False, True, True])
+np.greater(array1, array2)        # Verifica si los elementos del array1 son MAYORES que los del 2: np.array([False, True, True])
 np.greater_equal(array1, array2)  # Verifica si los elementos del array1 son MAYORES O IGUALES que los del 2
-np.less(array1, array2)  # Verifica si los elementos del array1 son MENORES que los del 2: np.array([True, False, True])
-np.less_equal(array1, array2)  # Verifica si los elementos del array1 son MENORES O IGUALES que los del 2
-np.equal(array1, array2)  # Verifica si los elementos son iguales
-np.not_equal(array1, array2)  # Verifica si los elementos son diferentes
+np.less(array1, array2)           # Verifica si los elementos del array1 son MENORES que los del 2: np.array([True, False, True])
+np.less_equal(array1, array2)     # Verifica si los elementos del array1 son MENORES O IGUALES que los del 2
+np.equal(array1, array2)          # Verifica si los elementos son iguales
+np.not_equal(array1, array2)      # Verifica si los elementos son diferentes
 
 # Funciones booleanas
 array1 = np.array([True, False, True])
@@ -93,14 +118,20 @@ np.logical_not(array1, array2)  # np.array([False, True, False])
 
 # Funciones estadísticas
 array = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-np.amin(array)  # Valor mínimo del array: 1
-np.amax(array)  # Valor máximo del array: 10
-np.percentile(array, 25)  # Percentil 25: 3.25
-np.median(array)  # Mediana (división del conjunto en dos mitades): 5.5
-np.mean(array)  # Media (tendencia central del conjunto): 5.5
+np.amin(array)                    # Valor mínimo del array: 1
+np.amax(array)                    # Valor máximo del array: 10
+np.percentile(array, 25)          # Percentil 25: 3.25
+np.median(array)                  # Mediana (división del conjunto en dos mitades): 5.5
+np.mean(array)                    # Media (tendencia central del conjunto): 5.5
 np.average(array, weights=pesos)  # Media ponderada usando una lista de pesos -> sum(val_n*peso_n) / n_valores
-np.std(array)  # Desviación estándar: 2.87228
-np.var(array)  # Varianza: 8.25
+np.std(array)                     # Desviación estándar: 2.87228
+np.var(array)                     # Varianza: 8.25
+
+# Otras funciones
+array.astype(np.float32)  # Convertir a dtype float32
+array.reshape(2, 5)  # Convertir array a matriz de 2x5 (se puede usar -1 para que NumPy decida)
+array.resize(3, 5)  # Convertir array a matriz de 3x5 (se rellenará repitiendo elementos)
+np.transpose(array, axes=(1, 0, 2))  # Transpone los ejes a la posición especificada (útil cuando se usan más de 2D)
 ```
 
 **Más información** sobre `NumPy` en su [guía de inicio rápido oficial](https://numpy.org/devdocs/user/quickstart.html).
