@@ -17,11 +17,11 @@ Las expresiones regulares son una secuencia de caracteres con otros caracteres e
 ```python
 import re
 mensaje = 'Esto es un mensaje de prueba para el curso de Python'
-match = re.search('curso', mensaje)  # match.start() es 37 y match.end() es 42
-match = re.match('Esto', mensaje)  # match.start() es 0 y match.end() es 4
-msg_dividido = re.split(' ', mensaje)  # Lista cuyos elementos son las palabras del mensaje
+match = re.search('curso', mensaje)           # match.start() es 37 y match.end() es 42
+match = re.match('Esto', mensaje)             # match.start() es 0 y match.end() es 4
+msg_dividido = re.split(' ', mensaje)         # Lista cuyos elementos son las palabras del mensaje
 mensaje2 = re.sub('Python', 'Java', mensaje)  # Devuelve 'Esto es un mensaje de prueba para el curso de Java'
-apariciones = re.findall('de', mensaje)  # Devuelve ['de', 'de']
+apariciones = re.findall('de', mensaje)       # Devuelve ['de', 'de']
 ```
 
 Estas son las funciones básicas, pero necesitamos conocer los componentes que pueden aparecer en los textos:
@@ -47,11 +47,11 @@ import re
 re.sub('es|ser', '**AQUI**', texto)  # Cambiar todas las apariciones de 'es' y 'ser' por '**AQUI**'
 
 ejemplo = '1 22 333 4444'
-re.findall('\d?\s', ejemplo)  # Buscar números con 1 o ningún dígito seguido de un espacio. Devuelve ['1', '2', '3']
-re.findall('3+', ejemplo)  # Buscar dónde aparece el número 3 1 o más veces. Devuelve ['333']
-re.findall('(1*2)', ejemplo)  # Buscar dónde aparece el número 1 ninguna o más veces seguido del número 2. Devuelve ['12', '2']
-re.findall('\d{3}', ejemplo)  # Buscar dónde aparece cualquier número repetido 3 veces. Devuelve ['333', '444']
-re.findall('\d{2,3}', ejemplo)  # Buscar dónde aparece cualquier número 2 o 3 veces seguidas. Devuelve ['22', '333', '444']
+re.findall('\d?\s', ejemplo)       # Buscar números con 1 o ningún dígito seguido de un espacio. Devuelve ['1', '2', '3']
+re.findall('3+', ejemplo)          # Buscar dónde aparece el número 3 1 o más veces. Devuelve ['333']
+re.findall('(1*2)', ejemplo)       # Buscar dónde aparece el número 1 ninguna o más veces seguido del número 2. Devuelve ['12', '2']
+re.findall('\d{3}', ejemplo)       # Buscar dónde aparece cualquier número repetido 3 veces. Devuelve ['333', '444']
+re.findall('\d{2,3}', ejemplo)     # Buscar dónde aparece cualquier número 2 o 3 veces seguidas. Devuelve ['22', '333', '444']
 re.findall('[2,3]{2,3}', ejemplo)  # Buscar dónde aparece el 2 o el 3 repetidos 2 o 3 veces seguidas. Devuelve ['22', '333']
 re.findall('[1-3]{2,3}', ejemplo)  # Buscar dónde aparecen números entre el 1 y el 3 repetidos 2 o 3 veces seguidas. Devuelve ['22', '333']
 ```

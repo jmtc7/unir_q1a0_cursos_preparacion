@@ -77,7 +77,7 @@ Algunos **atributos importantes** a conocer son:
 - `array.nbytes`: Tamaño en bytes de todo el array. Es equivalente a hacer `array.itemsize * array.size`.
 - `matrix.T`: Devuelve la matriz transpuesta, haciendo que las columnas sean las nuevas filas y viceversa.
 
-Como último detalle, es posible utilizar **indexación booleana**, lo que permite aplicar filtros de forma muy rápida. Consiste en algo así: `datos_filtrados = datos[datos < 10]`, lo que construiría un array `datos_filtrados` sólo con aquellos datos inferiores a 10. Dado que se puede utilizar sin necesidad de crear un nuevo array (por ejemplo, como generador en un bucle `for`), puede ser mucho más eficiente en el uso de la memoria y recursos computacionales.
+Como último detalle, es posible utilizar **indexación booleana**, lo que permite aplicar filtros de forma muy rápida. Consiste en algo así: `datos_filtrados = datos[datos < 10]`, lo que construiría un array `datos_filtrados` sólo con aquellos datos inferiores a 10. Dado que se puede utilizar sin necesidad de crear un nuevo array (por ejemplo, como generador en un bucle `for`), puede ser mucho más eficiente en el uso de la memoria y recursos computacionales. Para utilizar **varias condiciones**, se deben utilizar operadores lógicos como `&` (AND), `|` (OR) y `~` (NOT), no las palabras reservadas de Python (`and`, `or` y `not`).
 
 ### 2.2. Funciones Universales (ufuncts)
 Son aquellas que se aplican a todos los elementos de un array. Si se hacen con dos arrays, se aplicará elemento por elemento entre ambos (es necesario que ambos tengan el mismo tamaño). Las más importantes son:
@@ -136,12 +136,12 @@ np.transpose(array, axes=(1, 0, 2))  # Transpone los ejes a la posición especif
 
 **Más información** sobre `NumPy` en su [guía de inicio rápido oficial](https://numpy.org/devdocs/user/quickstart.html).
 
+
 ## 3. Pandas
 Es una extensión de `NumPy` y se orienta a manipular y analizar datos.
 
 ### 3.1. Series y DataFrames
-Las ***series*** son similares a las listas y a los arrays (datos en una dimensión). La diferencia es que los índices de los elementos pueden ser etiquetas elegidas por nosotros (aunque también se puede acceder usando la posición que ocupa cada elemento), como en los diccionarios. Podemos crear una serie con índices personalizados de varias formas (usando diccionarios, listas o incluso NumPy arrays).
-
+Las ***series*** son similares a las listas y a los arrays (datos en una dimensión). La diferencia es que los índices de los elementos pueden ser etiquetas elegidas por nosotros (aunque también se puede acceder usando la posición que ocupa cada elemento), como en los diccionarios. Podemos crear una serie con índices personalizados de varias formas (usando diccionarios, listas o incluso NumPy arrays). Aquí se muestran las operaciones más comunes a realizar con series:
 ```python
 import pandas as pd
 
@@ -150,16 +150,27 @@ serie2 = pd.Series([1, 2, 3], index=['a', 'b', 'c'])            # Usando listas
 serie3 = pd.Series(np.array([1, 2, 3]), index=['a', 'b', 'c'])  # Usando un NumPy.Array
 
 # Acceso a elementos
-elemento = serie1['b']  # 2
-elemento = serie1[1]    # 2
-elementos = serie1[1:]  # pd.Series({'b': 2, 'c': 3})
+elemento = serie1['b']          # 2
+elemento = serie1[1]            # 2
+elementos = serie1[1:]          # pd.Series({'b': 2, 'c': 3})
+elementos = serie1[serie1 < 3]  # Elementos cuyo valor sea menor a 3 (pd.Series({'a': 1, 'b': 2}))
 
 # Atributos importantes
 indices = serie1.index   # ['a', 'b', 'c']
 valores = serie1.values  # [1, 2, 3]
+
+# Funciones básicas
+serie1.sum()     # Sumar los valores de la serie
+serie1.mean()    # Media de los valores de la serie
+serie1.median()  # Mediana de los valores de la serie
+serie1.std()     # Desviación estándar de los valores de la serie
+serie1.min()     # Valor mínimo en la serie
+serie1.max()     # Valor máximo en la serie
 ```
 
-Dado que las series están basadas en NumPy arrays, podemos hacer operaciones vectorizadas fácilmente (siempre y cuando ambas tengan los mismos índices), como `serie1 + serie2`, `serie1 * 10` o `np.sqrt(serie1)`.
+`Pandas` ofrece métodos especiales para distintos tipos de series (temporales, categóricas, etc.) que permiten ordenarlas, combinarlas, cambiar la frecuencia de muestreo, aplicar ventanas móviles, obtener frecuencias, elminar categorías no utilizadas, detectar `NaNs`, etc. Para generar múltiples fechas (5) con una frecuencia deseada (días), se puede utilizar `pd.date_range(start='2023-01-01', periods=5, freq='D')`. Una función muy útil es `reindex()`, que permite reestructurar los datos y hacer interpolaciones con los datos existentes para rellenar valores que falten.
+
+Dado que las series están basadas en NumPy arrays, podemos hacer operaciones vectorizadas fácilmente, como `serie1 + serie2`, `serie1 * 10` o `np.sqrt(serie1)`. Dado que `Pandas` ofrece **alineación automática**, aunque las series tengan sus componentes en distinto orden o una serie tenga más elementos que otra, se utilizan los índices para poder alinear ambas y realizar las operaciones solicitadas.
 
 Los ***dataframes*** son las estructuras más utilizadas en `Pandas`. Representan una tabla con etiquetas en cada fila y columna. Se pueden crear de varias maneras
 
@@ -174,10 +185,12 @@ lista = [{'a': 10, 'b': 20, 'c': 3}, {'a': 4, 'b': 5, 'd': 6}]  # Lista de dicci
 dataframe = pd.DataFrame(diccionario)  # Cada diccionario será una fila con números como índices. Las claves de los diccionarios serán las columnas
 
 # Acceso a elementos (columnas y filas)
-col1 = dataframe['columna1']  # Acceso a una columna por su etiqueta -> devuelve pd.Series({'a': 10, 'b': 20, 'c': 3})
-fila_b = dataframe.loc['b']   # Acceso a una fila por su etiqueta/índice -> devuelve {'columna1': 20, 'columna2': 5}
-fila_1 = dataframe.iloc[1]    # Acceso a una fila por su posición -> devuelve {'columna1': 20, 'columna2': 5}
-fila_1 = dataframe.iloc[1:3]  # Acceso a VARIAS filas -> devuelve DF {'columna1': {'b': 20, 'c': 3, 'd': Nan}, 'columna2': {'b': 5, 'c': NaN, 'd': 6}}
+col1 = dataframe['columna1']            # Acceso a una columna por su etiqueta -> devuelve pd.Series({'a': 10, 'b': 20, 'c': 3})
+fila_b = dataframe.loc['b']             # Acceso a una fila por su etiqueta/índice -> devuelve {'columna1': 20, 'columna2': 5}
+fila_1 = dataframe.iloc[1]              # Acceso a una fila por su posición -> devuelve {'columna1': 20, 'columna2': 5}
+fila_1 = dataframe.iloc[1:3]            # Acceso a VARIAS filas -> devuelve DF {'columna1': {'b': 20, 'c': 3, 'd': Nan}, 'columna2': {'b': 5, 'c': NaN, 'd': 6}}
+fila_1 = dataframe.at['a', 'columna1']  # Acceso EFICIENTE al elemento en la fila 'a' y columna 'columna1' -> devuelve 10
+fila_1 = dataframe.iat[0, 0]            # Acceso EFICIENTE al elemento en la primera fila y columna -> devuelve 10
 
 # Añadir/eliminar elementos/columnas
 dataframe['columna3'] = pd.Series({'a': 7, 'b': 8, 'c': 9, 'd': 10})
@@ -188,7 +201,31 @@ filtro = np.greater(dataframe['columna1'], dataframe['columna2'])  # Devuelve qu
 dataframe[filtro]  # Devuelve DF {'columna1': {'a': 10, 'b': 20}, 'columna2': {'a': 4, 'b': 5}}
 ```
 
+Si se quieren hacer consultas más complejas, `Pandas` ofrece `query()`, `isin()` y `eval()`, para filtrar datos y para crear nuevas columnas, respectivamente. Otra manera de añadir columnas (especialmente útil si queremos encadenar operaciones) es `assign()`. También existe el método `get()`, que permite especificar un valor predeterminado si la columna requerida no existe. `where()` y `mask()` permiten susituir valores. Ejemplos de estas y otras funciones son:
+```python
+# Filtrado
+precio_alto = 1000
+productos_disponibles = df.query('disponible == True and precio < 1000')          # Filtrar productos disponibles con precio menor a 1000
+productos_disponibles = df.query('disponible == True and precio < @precio_alto')  # Referencia a variables utilizando '@'
+filtro = df['departamento'].isin(['IT', 'Finanzas'])  # A diferencia que la indexación booleana, podemos comprobar pertenencia a un conjunto de valores
+print(df[filtro])
+
+# Creación de columnas
+df.eval('descuento = precio * 0.1 if precio > 500 else precio * 0.05', inplace=True)  # Crear nueva columna 'descuento'
+df_nuevo = df.assign(precio_con_descuento = lambda x: x['precio'] * (1 - x['descuento']),
+                      ganancia_estimada = lambda x: x['precio_con_descuento'] * 0.3)  # Crear dos columnas, 'precio_con_descuento' y 'ganancia_estimada'
+descuento = df.get('descuento_adicional', pd.Series([0, 0, 0, 0, 0]))                 # Intentar obtener datos de la columna 'descuento_adicional'
+
+# Sustitución de valores
+resultado = df['salario'].where(df['salario'] >= 25000, 2000)  # Sustituir salarios menores a 2500 por 2000 (si no se da el 2000, serían NaN)
+resultado = df['salario'].mask(df['salario'] >= 25000, 2000)   # Sustituir salarios mayores a 2500 por 2000 (inverso a where())
+```
+
+Otras operaciones con columnas son `insert()` para insertarlas en una posición específica, `drop()` (o `del`, aunque es menos flexible) para eliminarlas, `rename()` para renombrarlas, `add_prefix()` y `add_suffix()`. 
+
 Al igual que con los NumPy arrays y con las series, también podemos aplicar operaciones con los dataframes, como `dataframe * 2` para multiplicar por 2 todos los elementos del dataframe o `dataframe1 + dataframe2` para sumar todos los elementos de dos dataframes. Sin embargo, hay que asegurarse de que tengan las mismas dimensiones para no causar errores (se generarán valores `NaN` en los elementos donde no se pueda operar). Otra operación útil con los dataframes es la **transpuesta**, que hace que las columnas se transformen en filas y viceversa. Se aplica ejecutando `dataframe.T`.
+
+Otra funcionalidad útil de los dataframes es poder utilizar **índices jerárquicos** o **multiíndices** con `pd.MultiIndex`, lo que permite añadir más de un índice a cada fila del dataframe, pudiendo etiquetar, por ejemplo, país y ciudad. 
 
 ### 3.2. Funciones de Gestión de Datos
 Utilizaremos el siguiente dataframe para los ejemplos:
@@ -203,9 +240,107 @@ Otro recurso es aplicar **funciones anónimas/lambda/map** a todos los elementos
 
 Al igual que las series, los dataframes también ofrecen **operaciones estadísticas**, como `dataframe.describe()`, que da información de cuántos valores distintos hay para cada atributo, la media, la desviación estándar, varios percentiles, el valor máximo, etc. Los resultados dependen del tipo de datos almacenados en el dataframe. También podemos aplicar funciones más específicas, las cuales se aplicarán sólo a las columnas compatibles. Por ejemplo, si hacemos `dataframe.median()`, sólo se aplicará a la columna `'edad'`.
 
+La función `dataframe.info()` proporciona **información sobre los dtypes** de los datos, la memoria utilizada y la cantidad de valores NaN. Otra forma de obtener información sobre los dtypes es con `dataframe.dtypes`, y otra forma de detectar valores NaN es usando `dataframe.isna()`, que puede estar seguido de `any()` o `all()` para más precisión (esto es muy útil para filtrar los datos y utilizar solo aquellos válidos).
+
+`Pandas` ofrece varias funciones principales para combinar dataframes y manipularlos:
+- `merge()`: Combina dataframes basándose en sus columnas en común, aunque con su parámetro `how`, se pueden utilizar los otros tipos de *join* de SQL para conservar las filas de uno o ambos dataframes en lugar de sólo aquellas que coinciden en ambos.
+- `join()`: Simplificación de `merge()` para combinar dataframes por sus índices. Equivale a `merge()` con `left_index=True`, `right_index=True`.
+- `concat()`: Une dataframes a lo largo de un eje específico (filas o columnas).
+- `stack()` y `unstack()`: Convierten una o varias columnas en encabezados jerárquicos/multi-índice o viceversa.
+- `groupby()` y `agg()`: Permiten agrupar todas las filas que tengan el mismo valor para alguna (o varias) columnas, lo que se suele combinar con extraer algún otro valor y obtener ciertas estadísticas. Por ejemplo, así podemos agrupar todas las ventas de cada vendedor, obtener su valor total y calcular su suma, su media y su número total: `estadisticas_vendedor = ventas.groupby('vendedor')['valor_total'].agg(['sum', 'mean', 'count'])`.
+- `filter()` es similar a `gropuby()`, pero selecciona grupos completos basándose en una condición personalizada, como: `vendedores_top = ventas.groupby('vendedor').filter(lambda x: x['unidades'].sum() > 10)`.
+- Se pueden aplicar otras funciones a parte de los dataframes con `apply()` (aplica funciones a una o varias columnas del DF), `map()` (suele usarse para reemplazar valores) o `applymap()` (aplica una función a todos los elementos de un DF).
+
+Para tratar con variables categóricas, podemos utilizar múltiples herramientas disponibles para los `string` de Python utilizando el accesorio `.str` (los valores nulos serán ignorados), como por ejemplo:
+```python
+nombres = pd.Series(['Ana García', 'Juan Pérez', 'María Rodríguez', 'Carlos López'])
+
+# Capitalización
+print(nombres.str.upper())       # Convertir a mayúsculas
+print(nombres.str.lower())       # Convertir a minúsculas
+print(nombres.str.capitalize())  # Primera letra en mayúscula
+print(nombres.str.title())       # Primera letra de cada palabra en mayúscula
+
+# Extracción de subcadenas
+print(nombres.str[:4])       # Extraer los primeros 4 caracteres
+print(nombres.str.strip())   # Eliminar espacios en blanco al inicio y final
+print(nombres.str.lstrip())  # Eliminar espacios a la izquierda
+print(nombres.str.rstrip())  # Eliminar espacios a la derecha
+
+# Análisis de texto
+contiene_ana   = nombres.str.contains('Ana')
+ocurrencias_a  = nombres.str.count('a')
+comienza_con_m = nombres.str.startswith('M')
+termina_con_ez = nombres.str.endswith('ez')
+
+# Uso de expresiones regex (con funciones contains(), match(), findall(), extractall(), replace())
+tiene_email = datos['texto'].str.contains(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')  # Alfanuméricos+símbolos @ alfanuméricos . 2 o más letras
+comienza_articulo = datos['texto'].str.match(r'(El|La)\s')  # Devuelve textos comenzando por 'El' o 'La'
+numeros = datos['texto'].str.findall(r'\d+')                # Devuelve todos los números del texto
+pares = datos['texto'].str.extractall(r'([A-Z])(\d)')       # Extrae todos los pares de letras y números
+texto_modificado = datos['texto'].str.replace(r'\$(\d+),(\d+)\.(\d+)', r'\1\2.\3 USD', regex=True)  # Reemplazar formato de precios ($12,345.67 -> 12345.67 USD)
+```
+
+Otra herramienta muy útil es analizar si algunas variables del dataframe presentan **correlación** directa (1), inversa (-1) o no están correladas (0). Para hacer esto, utilizamos `corr()` y podemos visualizarlo con `matplotlib`:
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Creamos un DataFrame con variables relacionadas
+np.random.seed(42)
+n = 100
+df = pd.DataFrame({
+    'edad': np.random.randint(18, 70, n),
+    'ingresos': np.random.normal(30000, 15000, n),
+    'gastos': np.random.normal(25000, 10000, n),
+    'experiencia': np.random.randint(0, 40, n),
+    'satisfaccion': np.random.randint(1, 11, n)
+})
+
+# Añadimos algunas relaciones
+df['ingresos'] = df['ingresos'] + df['edad'] * 500 + np.random.normal(0, 5000, n)
+df['gastos'] = df['ingresos'] * 0.7 + np.random.normal(0, 5000, n)
+df['satisfaccion'] = 10 - 0.1 * (df['gastos'] / df['ingresos'] * 10) + np.random.normal(0, 2, n)
+
+# Calcular la matriz de correlación (coeficiente de Pearson por defecto)
+matriz_corr = df.corr()  # Podemos elegir otra correlación con el parámetro 'method' (spearman, kendall, etc.)
+print("Matriz de correlación:")
+print(matriz_corr)
+
+# Crear un mapa de calor (heatmap) de correlaciones
+plt.figure(figsize=(10, 8))
+sns.heatmap(matriz_corr, annot=True, cmap='coolwarm', vmin=-1, vmax=1, fmt='.2f')
+plt.title('Matriz de correlación')
+plt.tight_layout()
+plt.show()
+
+# Crear un pairplot para visualizar relaciones bivariadas (más detallado)
+sns.pairplot(df)
+plt.suptitle('Relaciones entre variables', y=1.02)
+plt.show()
+```
+
+Para **generar fechas** en un formato homogéneo, es recomendable utilizar `to_datetime()`, que permite transformar elementos o listas de fechas en múltiples formatos como '2023-01-15', '15/02/2023', 'March 10, 2023' o '2023.04.20'. Además, utilizando el argumento `format`, se puede especificar el formato de destino deseado con cadenas como `'%d-%m-%Y %H:%M:%S'`. El argumento `errors` permite elegir si se quiere lanzar un error, convertir los elementos problemáticos a NaT (equivalente a NaN) o ignorarlos. Otra funcionalidad es utilizar `tz_localize()` y `tz_convert()` para definir en qué **zona horaria** se encuentra una hora y convertirla.
+
+Si queremos **resumir dataframes**, podemos utilizar `pivot_table()`, que permite elegir varias columnas, una cuyos valores serán las nuevas columnas, otra cuyos valores serán los nuevos índices y otras cuyos valores se combinarán con una serie de funciones para generar los valores del nuevo dataframe:
+```python
+# Mostrar suma de ventas y promedio de unidades para cada combinación de producto y región, incluyendo totales (margins=True)
+tabla_compleja = df.pivot_table(
+    values=['ventas', 'unidades'],
+    index=['producto'],  # Los productos serán los nuevos índices
+    columns=['región'],  # Las regiones serán las nuevas columnas
+    aggfunc={'ventas': 'sum', 'unidades': 'mean'},  # Puede ser sum, mean, median, min/max, count, std, var o lambdas o funciones de Python con 1 parámetro
+    fill_value=0,  # Reemplazar valores NaN con 0s
+    margins=True  # Incluir totales
+)
+```
 
 **Más información** sobre `Pandas` en su [guía de usuario oficial](https://pandas.pydata.org/docs/user_guide/10min.html#min).
 
 
 ## 4. Lectura y Escritura de Ficheros CSV
 Lo más normal no es crear un dataframe desde cero, si no empezar a partir de un conjunto de datos ya existente. Estos pueden estar en bases de datos, o en ficheros XML, JSON o CSV. Este último es el formato más común, por lo que veremos cómo leer la información en ellos y procesarla con `Pandas` y dataframes. Para leer un CSV, podemos utilizar `pd.read_csv('path/to/csv/file.csv')`, lo que generará un dataframe. Para guardar un dataframe en un fichero CSV, utilizamos `dataframe.to_csv('path/to/csv/file.csv')`.
+
+Sin embargo, también existen las funciones `read_excel()`, `read_json()`, `read_sql()`, `read_sql_table()`, `read_hdf()`, `read_html()`, `read_xml()`, etc.
