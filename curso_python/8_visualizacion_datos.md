@@ -61,43 +61,21 @@ En el script [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_
 Los **ejes** es donde mostramos los gráficos y ofrecen varios elementos configurables, como:
 - `set_xlim()` y `set_ylim()` para establecer los números mínimos y máximos de cada eje. Otra opción es `margins()`, que añade un margen alrededor de los datos mostrados sin necesidad de especificar los límites manualmente.
 - `set_xscale()` y `set_xscale()` para establecer la escala (linear, logarítmica, etc.). Algunas escalas aceptan el parámetro `linthresh`, que permite mantener una escala lineal hasta cierto punto.
-- `set_xlabel()`, `set_xlabel()` y `set_title()` para ponerles etiquetas a los ejes y al gráfico.
+- `set_xlabel()`, `set_xlabel()` y `set_title()` para ponerles etiquetas a los ejes y al gráfico. Algunos argumentos relevantes son `fontdict` para personalizar la fuente, `loc` para elegir la posición, `pad` para distanciarlo de la gráfica, etc. También se pueden utilizar **regular expressions** para utilizar expresiones matemáticas en **LaTeX**.
 - `set_xticks()`, `set_yticks()`, `set_xticklabels()` y `set_yticklabels()` para elegir dónde aparecen las marcas de los ejes y su contenido.
+- `legend()` añade una leyenda que utiliza los valores de `label` de cada elemento añadido a la gráfica. También se puede personalizar su posición con `loc`, en cuántas columnas se muestra con `ncol`, su tamaño con `fontsize`, si queremos borde con `frameon`, su título con `title`, etc.
+
+Para **personalizar** `Matplotlib` podemos utilizar:
+- `plt.style.use()`, que permite elegir entre distintos temas, como `classic` (tradicional y menos estilizado), `ggplot2` (inspirado en R, moderno y limpio), el `seaborn` (suave y atraactivo), el `dark_background` (fondo oscuro) o el `fivethirtyeight` (inspirado en *FiveThirtyEight*, para un estilo periodístico y profesional). Más estilos junto con una visualización de todos ellos puede encontrarse en la [documentación oficial](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html).
+- `rcParams` permite modificar todos los parámetros de los estilos (colores, tamaño de fuente, tipos de líneas, etc.).
+- Los **argumentos de las funciones** para generar gráficos suelen ofrecer parámetros para cambiar el tipo de línea, su grosor, su color, etc. Respecto a los **colores**, se pueden utilizar colores predefinidos (`red`, `blue`, `purple`, etc.) o escoger valores RGB o RGBA con una tupla de floats o con códigos hexadecimales. También podemos utilizar distintos mapas de color, ya sea de los [predefinidos](https://matplotlib.org/stable/users/explain/colors/colormaps.html) o generando uno personalizado con `LinearSegmentedColormap`.
+- Utilizando `annotate()` podemos añadir texto en cualquier zona del gráfico conectado con otro punto de la gráfica con una flecha. Si sólo queremos el texto, sin la flecha, podemos utilizar `text()`. Estas funciones también soportan **regular expressions**, por lo que se pueden usar fórmulas y símbolos en formato **LaTeX**.
 
 Para guardar los gráficos generados, se utiliza `fig.savefig('grafico.png', dpi=300)` (72 dpi es suficiente para visualizaciones en pantalla, 300 es común para impresiones de alta calidad). Utilizar formatos vectoriales como SVG o PDF es mejor si los gráficos van a incluirse en documentos. Otros argumentos útiles son:
 - `metadata`, para incluir un título o un autor en los metadatos de la imagen generada.
 - `bbox_inches`, a la que se puede asignar `tight` para minimizar el espacio en blanco alrededor del gráfico.
 
-# 8.3. TODO
 
-# 8.4. TODO
-
-# 8.5. TODO
-
-# 8.6. TODO
-
-# 8.7. TODO
-
-# 8.8. TODO
-
-# 8.9. TODO
-
-# 8.10. TODO
-
-# 8.11. TODO
-
-# 8.12. TODO
-
-# 8.13. TODO
-
-# 8.14. TODO
-
-# 8.15. TODO
-
-# 8.16. TODO
-
-# 8.17. TODO
-
-# 8.18. TODO
+# 8.3. Seaborn
 
 
