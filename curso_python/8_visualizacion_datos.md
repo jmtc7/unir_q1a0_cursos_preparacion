@@ -26,7 +26,7 @@ Además de su interfaz orientada a objetos, `Matplotlib` ofrece `PyPlot`, otra i
 import matplotlib.pyplot as plt
 
 plt.plot([1, 2, 3, 4], [10, 20, 25, 30])  # Mostrar datos
-ax.set_title('Título del gráfico')
+plt.set_title('Título del gráfico')
 plt.xlabel('Eje X')
 plt.ylabel('Eje Y')
 plt.show()  # Mostrar gráfico
@@ -44,57 +44,13 @@ ax.set_ylabel('Eje Y')
 plt.show()  # Mostrar gráfico
 ```
 
-Respecto a los **tipos de gráficos**, tenemos los siguientes:
-```python
-import matplotlib.pyplot as plt
-import numpy as np
+Respecto a los **tipos de gráficos**, tenemos los siguientes (el código para generarlos está en [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py)):
 
-x = [0, 1, 2, 3, 4]
-y = [0, 1, 4, 9, 16]
-plt.plot(x, y)  # Gráfico de líneas
-plt.xlabel('Tiempo')
-plt.ylabel('Valor')
-plt.title('Gráfico de líneas')
-plt.show()
+<img src="imgs/8_visualizacion__graficos_univariantes.png" height="300">
 
-categorias = ['A', 'B', 'C', 'D', 'E']
-plt.bar(categorias, x)  # Gráfico de barras
-plt.xlabel('Categoría')
-plt.ylabel('Valor')
-plt.title('Gráfico de barras')
-plt.show()
-
-datos = np.random.standard_normal(1000)  # Datos aleatorios
-plt.hist(datos, bins=30)  # Histograma
-plt.xlabel('Valor')
-plt.ylabel('Frecuencia')
-plt.title('Histograma')
-plt.show()
-
-x = [5, 7, 8, 5, 6, 7, 9, 2, 3, 4, 4, 4, 5, 6, 7]
-y = [7, 4, 3, 8, 3, 2, 4, 9, 6, 1, 8, 7, 1, 2, 6]
-plt.scatter(x, y)  # Diagrama de dispersión (gráfico de puntos)
-plt.xlabel('Variable X')
-plt.ylabel('Variable Y')
-plt.title('Diagrama de dispersión')
-plt.show()
-
-labels = 'A', 'B', 'C', 'D'
-sizes = [15, 30, 45, 10]
-plt.pie(sizes, labels=labels, autopct='%1.1f%%')  # Gráfico de sectores (pastel)
-plt.title('Gráfico de sectores')
-plt.show()
-
-data = np.random.random((10, 10))  # Generar datos aleatorios
-plt.imshow(data, cmap='hot', interpolation='nearest')  # Mapa de calor (o imágenes)
-plt.colorbar()
-plt.title('Mapa de calor')
-plt.show()
-```
-
-> TODO: IMPLEMENTARLO EN SUBPLOTS DE 2x3 y MOSTRAR IMAGEN RESULTANTE
-> TODO 2: Continuar por subsección "Guardar gráficos en diferentes formatos"
-
+Para guardar los gráficos generados, se utiliza `fig.savefig('grafico.png', dpi=300)` (72 dpi es suficiente para visualizaciones en pantalla, 300 es común para impresiones de alta calidad). Utilizar formatos vectoriales como SVG o PDF es mejor si los gráficos van a incluirse en documentos. Otros argumentos útiles son:
+- `metadata`, para incluir un título o un autor en los metadatos de la imagen generada.
+- `bbox_inches`, a la que se puede asignar `tight` para minimizar el espacio en blanco alrededor del gráfico.
 
 # 8.3. TODO
 
