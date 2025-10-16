@@ -44,15 +44,13 @@ ax.set_ylabel('Eje Y')
 plt.show()  # Mostrar gráfico
 ```
 
+Cuando se creanfiguras, ya sea con `plt.figure()` o con `plt.subplots()`, se puede elegir el tamaño de la misma utilizando el argumento `figsize`, que recibe una tupla con el ancho y alto de la figura en pulgadas. Por otro lado, la función `plt.tight_layout()` permite ajustar los márgenes y espacios para evitar que los títulos y etiquetas de la figura se superpongan.
+
 Respecto a los **tipos de gráficos**, en las siguientes imágenes se muestran los tipos de gráficos univariantes, bivariantes y multivariantes que propone `Matplotlib` (el código para generarlos está en [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py)). Es necesario precisar que para utilizar los gráficos en 3D, se necesita utilizar el módulo `mpl_toolkits.mplot3d` e inicializar un objeto `Axes3D`.
 
 <img src="imgs/8_visualizacion__graficos_univariantes.png" width="1000">
 <img src="imgs/8_visualizacion__graficos_bivariantes.png" width="1000">
 <img src="imgs/8_visualizacion__graficos_multivariantes.png" width="1000">
-
-Otro tipo de visualización son los **pares de gráficos** o *pairplots*, que consisten en combinar múltiples variables (4 en el ejemplo) y representar un gráfico de dispersión para cada posible combinación de variables, generando una matriz de gráficos. La **diagonal** de dicha matriz suele ser un histograma que represente la distribución de valores de cada variable. `Seaborn` permite utilizar una **variable categórica** para colorear los puntos, lo que puede ser útil si las muestras de cada variable pertenecen a categorías diferenciadas. Aquí se muestran ejemplos de ambos casos (el código también está en [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py)):
-
-<img src="imgs/8_visualizacion__pairplot.png" height="600">
 
 En el script [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py) se utiliza `plt.subplots()` para organizar **múltiples visualizaciones** en una sola figura. Sin embargo, `Matplotlib` ofrece un control más detallado mediante:
 - `plt.subplots_adjust()` y sus parámetros `wspace` y `hspace`, que controlan el espacio entre subplots.
@@ -74,8 +72,29 @@ Para **personalizar** `Matplotlib` podemos utilizar:
 Para guardar los gráficos generados, se utiliza `fig.savefig('grafico.png', dpi=300)` (72 dpi es suficiente para visualizaciones en pantalla, 300 es común para impresiones de alta calidad). Utilizar formatos vectoriales como SVG o PDF es mejor si los gráficos van a incluirse en documentos. Otros argumentos útiles son:
 - `metadata`, para incluir un título o un autor en los metadatos de la imagen generada.
 - `bbox_inches`, a la que se puede asignar `tight` para minimizar el espacio en blanco alrededor del gráfico.
+- `transparent` acepta valores booleanos para guardar los gráficos con un fondo transparente.
+
+`Matplotlib` ofrece opciones de gráficos más avanzados y complicados. Para más detalles sobre ellos, visita la [documentación oficial](https://matplotlib.org/stable/gallery/index.html).
 
 
 # 8.3. Seaborn
+`Seaborn` está construida sobre `Matplotlib`, pero ofrece una mejor integración con `NumPy` y `Pandas` y se centra más en **gráficos estadísticos** así como en mejorar el **estilo y la estética**. Puedes ver los gráficos que permite generar en su [galería oficial](https://seaborn.pydata.org/examples/index.html).
+
+Una diferencia con `Matplotlib` es que `Seaborn` ofrece una serie de **datasets integrados**. Se puede obtener una lista de estos con `get_dataset_names()` y cargar el dataset que desees utilizando `load_dataset()`, lo que permite practicar distintos tipos de visualización. Algunos de ellos son `tips`, `iris`, `penguins`, `flights` y `diamonds`. También es posible cargar CSVs propios con `Pandas` utilizando `read_csv()`.
+
+Las principales gráficas disponibles en `Seaborn` son:
+- Los **histogramas** (ideales para mostrar **distribuciones**). A diferencia que con `Matplotlib`, en `Seaborn` tienen la opción de utilizar KDE (*Kernel Density Estimation*) para generar una **estimación suave** de la distribución.
+- Gráficos de **dispersión y** de **líneas** para **datos relacionales**. Las líneas son especialmente útiles con series temporales.
+- ***Box plot***, ***violin plot***, ***bar plot*** y ***strip plot*** para **datos categóricos**, para ver cómo varía una variable numérica en función de una categórica. Muy útiles para visualizar medianas, medias, cuartiles y valores atípicos o *outliers*.
+- El `regplot` y el `lmplot` permiten añadir una línea de **regresión y** un intervalo de **confianza**.
+- El `jointplot` muestra al mismo tiempo las **distribuciones univariante y bivariante** de dos variables.
+- Las **facetas y grids** crean **gráficos de múltiples subgrupos de datos**, facilitando la comparación entre categorías. `catplot` y `relplot` crean gráficos complejos.
 
 
+Otro tipo de visualización son los **pares de gráficos** o *pairplots*, que consisten en combinar múltiples variables (4 en el ejemplo) y representar un gráfico de dispersión para cada posible combinación de variables, generando una matriz de gráficos. La **diagonal** de dicha matriz suele ser un histograma que represente la distribución de valores de cada variable. `Seaborn` permite utilizar una **variable categórica** para colorear los puntos, lo que puede ser útil si las muestras de cada variable pertenecen a categorías diferenciadas. Aquí se muestran ejemplos de ambos casos (el código también está en [actividades/seccion8_graficos_seaborn.py](actividades/seccion8_graficos_seaborn.py)):
+
+<img src="imgs/8_visualizacion__pairplot.png" height="600">
+
+Para **mostrar y guardar los gráficos** generados, se utilizan las mismas funciones que en `Matplotlib`. Es decir, `plt.show()` y `plt.savefig()`. Los **parámetros de estilo** y personalización también son comunes, lo que permite mantener un estilo consistente entre ambos módulos. Si se crearon **varios ejes y subplots** con `Matplotlib`, las funciones gráficas de `Seaborn` aceptan el parámetro `ax` para especificar en qué eje deben mostrarse.
+
+# TODO: crear script que muestre todas las funciones (esperar a secciones univariante, bivariante y multivariante?)

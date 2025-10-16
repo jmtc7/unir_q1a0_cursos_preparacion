@@ -1,7 +1,6 @@
 
 from mpl_toolkits.mplot3d import Axes3D # Habilita los gráficos 3D
 import matplotlib.pyplot as plt         # Creación de gráficos
-import seaborn as sns                   # Pares de gráficas (pairplots)
 import pandas as pd                     # Generación de DataFrames para los pairplots
 import numpy as np                      # Generación de números aleatorios
 
@@ -16,7 +15,9 @@ def graficos_univariantes() -> None:
     - Gráfico de Violín (violin-plot en inglés)
     """
     # Crear una figura con 4 subplots en horizontal
-    fig, ax = plt.subplots(1, 4, figsize=TAMAÑO)
+    super_titulo = 'Gráficos Univariantes'
+    fig, ax = plt.subplots(1, 4, figsize=TAMAÑO, num=super_titulo)
+    fig.suptitle(super_titulo)
 
     datos = np.random.standard_normal(1000)  # Datos aleatorios
     ax[0].hist(datos, bins=30, color='blue', alpha=0.7, edgecolor='black')  # Otros parámetros: cumulative, density/normalización
@@ -61,7 +62,9 @@ def graficos_bivariantes() -> None:
     - Gráfico de barras agrupadas
     """
     # Crear una figura con 4 subplots en horizontal
-    fig, ax = plt.subplots(1, 4, figsize=TAMAÑO)
+    super_titulo = 'Gráficos Bivariantes'
+    fig, ax = plt.subplots(1, 4, figsize=TAMAÑO, num=super_titulo)
+    fig.suptitle(super_titulo)
 
     # Diagrama de dispersión con línea de regresión
     x = np.array([5, 7, 8, 5, 6, 7, 9, 2, 3, 4, 4, 4, 5, 6, 7])
@@ -119,7 +122,9 @@ def graficos_multivariantes() -> None:
     - Gráficos de superfície 3D
     """
     # Crear 1 figura y 4 subplots (2 de ellos en 3D)
-    fig = plt.figure(figsize=TAMAÑO)
+    super_titulo = 'Gráficos Multivariantes'
+    fig = plt.figure(figsize=TAMAÑO, num=super_titulo)
+    fig.suptitle(super_titulo)
     ax1 = fig.add_subplot(1, 4, 1)
     ax2 = fig.add_subplot(1, 4, 2)
     ax3 = fig.add_subplot(1, 4, 3, projection='3d')
@@ -165,27 +170,9 @@ def graficos_multivariantes() -> None:
 
     plt.show()
 
-def graficos_pairplot() -> None:
-    """
-    Genera una figura mostrando pares de gráficos (pair-plots en inglés) utilizando una variable categórica para dividir (y colorear) las muestras.
-    """
-    # DataFrame de ejemplo con variable categórica que divida las muestras en 2 grupos
-    data = pd.DataFrame({
-        'Variable A': np.random.random(100),
-        'Variable B': np.random.random(100),
-        'Variable C': np.random.random(100),
-        'Variable D': np.random.random(100)
-    })
-    data['Categoría'] = np.random.choice(['Grupo 1', 'Grupo 2'], size=100)
-
-    # Creación del pairplot categórico
-    sns.pairplot(data, hue='Categoría')
-    plt.show()
-
 
 if __name__ == '__main__':
     graficos_univariantes()
     graficos_bivariantes()
     graficos_multivariantes()
-    graficos_pairplot()
     # TODO: Add world map visualization like https://stackoverflow.com/questions/72598996/indexerror-too-many-indices-for-array-array-is-1-dimensional-but-2-were-index
