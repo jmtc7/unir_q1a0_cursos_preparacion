@@ -120,4 +120,6 @@ sns.relplot(data=datos,
 plt.show()
 ```
 
-Para **mostrar y guardar los gráficos** generados, se utilizan las mismas funciones que en `Matplotlib`. Es decir, `plt.show()` y `plt.savefig()`. Los **parámetros de estilo** y personalización también son comunes, lo que permite mantener un estilo consistente entre ambos módulos. Si se crearon **varios ejes y subplots** con `Matplotlib`, las funciones gráficas de `Seaborn` aceptan el parámetro `ax` para especificar en qué eje deben mostrarse.
+Al utilizar funciones de `Seaborn` que devuelven un objeto figura, como `displot()` o `catplot()`, puedes añadir un título a la figura completa utilizando `figure.suptitle()`. Es conveniente llamar a `tight_layout()` para evitar que el título se solape con otros contenidos de la figura. Para más detalles sobre cómo poner y modificar títulos, ejes, etiquetas de ejes y leyendas, constultar el script [actividades/seccion8_graficos_seaborn.py](actividades/seccion8_graficos_seaborn.py).
+
+Para **modificar límites de ejes, escalas, mostrar y guardar gráficos**, etc., se utilizan las mismas funciones que en `Matplotlib`. Es decir, `set_xlim()`, `set_ylim()`, `margins()`, `set_xscale()`, `set_yscale()`, `plt.show()` y `plt.savefig()`. Los **parámetros de estilo** y personalización también son comunes, lo que permite mantener un estilo consistente entre ambos módulos. Si se crearon **varios ejes y subplots** con `Matplotlib`, las funciones gráficas de `Seaborn` aceptan el parámetro `ax` para especificar en qué eje deben mostrarse.
