@@ -1,18 +1,18 @@
-
 from mpl_toolkits.mplot3d import Axes3D # Habilita los gráficos 3D
 import matplotlib.pyplot as plt         # Creación de gráficos
-import pandas as pd                     # Generación de DataFrames para los pairplots
 import numpy as np                      # Generación de números aleatorios
 
-TAMAÑO = (16, 4)  # Tamaño de figura horizontal
+TAMAÑO = (20, 5)  # Tamaño de figura horizontal
 
-def graficos_univariantes() -> None:
+def graficos_univariantes(tamaño: tuple=(20, 5)) -> None:
     """
     Genera una figura con 4 subplots mostrando gráficos univariantes. Respectivamente:
     - Histograma
     - Gráfico de sectores (pastel o pie-chart en inglés)
     - Diagrama de Caja y Bigotes (boxplot en inglés)
     - Gráfico de Violín (violin-plot en inglés)
+
+    :param tamaño: Tupla con el tamaño en pulgadas (x, y) que debe usarse para la ventana con los gráficos.
     """
     # Crear una figura con 4 subplots en horizontal
     super_titulo = 'Gráficos Univariantes'
@@ -21,7 +21,7 @@ def graficos_univariantes() -> None:
 
     datos = np.random.standard_normal(1000)  # Datos aleatorios
     ax[0].hist(datos, bins=30, color='blue', alpha=0.7, edgecolor='black')  # Otros parámetros: cumulative, density/normalización
-    ax[0].set_xlabel('Valor')
+    ax[0].set_xlabel('Variable 1')
     ax[0].set_ylabel('Frecuencia')
     ax[0].set_title('Histograma')
 
@@ -39,7 +39,7 @@ def graficos_univariantes() -> None:
             medianprops=dict(color='red'))                           # Personalizar mediana
     ax[2].set_title('Diagrama de Caja y Bigotes (boxplot)')
     ax[2].set_xlabel('Grupos')
-    ax[2].set_ylabel('Valores')
+    ax[2].set_ylabel('Variable 1')
 
     parts = ax[3].violinplot(data, showmeans=True, showmedians=True)  # Mostrar medias (verde) y medianas (rojo)
     for pc in parts['bodies']:
@@ -49,17 +49,19 @@ def graficos_univariantes() -> None:
     parts['cmedians'].set_edgecolor('red')
     ax[3].set_title('Gráfico de Violín (violinplot)')
     ax[3].set_xlabel('Grupos')
-    ax[3].set_ylabel('Valores')
+    ax[3].set_ylabel('Variable 1')
 
     plt.show()
 
-def graficos_bivariantes() -> None:
+def graficos_bivariantes(tamaño: tuple=(20, 5)) -> None:
     """
     Genera una figura con 4 subplots mostrando gráficos bivariantes. Respectivamente:
     - Diagrama de dispersión (i.e., gráfico de puntos) con una línea de regresión
     - Gráfico de líneas
     - Gráfico de barras apiladas
     - Gráfico de barras agrupadas
+
+    :param tamaño: Tupla con el tamaño en pulgadas (x, y) que debe usarse para la ventana con los gráficos.
     """
     # Crear una figura con 4 subplots en horizontal
     super_titulo = 'Gráficos Bivariantes'
@@ -73,8 +75,8 @@ def graficos_bivariantes() -> None:
     ax[0].scatter(x, y, color='red', marker='*', label='Muestras')  # Color rojo y '*' como puntos
     ax[0].plot(x, m*x + b, color='blue', label='Regresión')       # Añadir línea de regresión
     ax[0].set_title('Diagrama de dispersión con regresión')
-    ax[0].set_xlabel('Variable X')
-    ax[0].set_ylabel('Variable Y')
+    ax[0].set_xlabel('Variable 1')
+    ax[0].set_ylabel('Variable 2')
     ax[0].legend()  # Añadir leyenda
     ax[0].grid()    # Añadir cuadrícula grid
 
@@ -85,8 +87,8 @@ def graficos_bivariantes() -> None:
     ax[1].plot(x, y1, marker='x', linestyle='--', color='red', label='Línea 1')  # Linea discontinuea con puntos 'x'
     ax[1].plot(x, y2, marker='s', color='orange', label='Línea 2')                # Linea naranja con puntos cuadrados
     ax[1].set_title('Gráfico de líneas')
-    ax[1].set_xlabel('Tiempo')
-    ax[1].set_ylabel('Valor')
+    ax[1].set_xlabel('Variable 1')
+    ax[1].set_ylabel('Variable 2')
     ax[1].legend()
 
     # Gráfico de barras apiladas
@@ -96,8 +98,8 @@ def graficos_bivariantes() -> None:
     ax[2].bar(categorias, valores1, color='skyblue', label='Conjunto 1', hatch='/')  # Azul claro con patrón
     ax[2].bar(categorias, valores2, bottom=valores1, color='lightgreen', label='Conjunto 2', hatch='\\')  # Verde claro con patrón
     ax[2].set_title('Gráfico de barras apiladas')
-    ax[2].set_xlabel('Categorías')
-    ax[2].set_ylabel('Valores')
+    ax[2].set_xlabel('Variable 1')
+    ax[2].set_ylabel('Variable 2')
     ax[2].legend()
 
     # Gráfico de barras agrupadas
@@ -106,24 +108,26 @@ def graficos_bivariantes() -> None:
     ax[3].bar(x - ancho/2, valores1, width=ancho, label='Conjunto 1')
     ax[3].bar(x + ancho/2, valores2, width=ancho, label='Conjunto 2')
     ax[3].set_title('Gráfico de barras agrupadas')
-    ax[3].set_xlabel('Categorías')
-    ax[3].set_ylabel('Valores')
+    ax[3].set_xlabel('Variable 1')
+    ax[3].set_ylabel('Variable 2')
     ax[3].set_xticks(x, categorias)  # Etiquetar correctamente las posiciones en el eje x.
     ax[3].legend()
 
     plt.show()
 
-def graficos_multivariantes() -> None:
+def graficos_multivariantes(tamaño: tuple=(20, 5)) -> None:
     """
     Genera una figura con 4 subplots mostrando gráficos univariantes. Respectivamente:
     - Mapa de calor (heatmap en inglés) para 3 variables (x, y, color)
     - Gráfico de dispersión para 4 variables (x, y, size, color)
     - Gráficos de dispersión 3D
     - Gráficos de superfície 3D
+
+    :param tamaño: Tupla con el tamaño en pulgadas (x, y) que debe usarse para la ventana con los gráficos.
     """
     # Crear 1 figura y 4 subplots (2 de ellos en 3D)
     super_titulo = 'Gráficos Multivariantes'
-    fig = plt.figure(figsize=TAMAÑO, num=super_titulo)
+    fig = plt.figure(figsize=tamaño, num=super_titulo)
     fig.suptitle(super_titulo)
     ax1 = fig.add_subplot(1, 4, 1)
     ax2 = fig.add_subplot(1, 4, 2)
@@ -143,17 +147,17 @@ def graficos_multivariantes() -> None:
     colors = np.random.random(100)        # Variable 4
     disp4d = ax2.scatter(x, y, c=colors, s=sizes, alpha=0.5, cmap='viridis')
     ax2.set_title('Gráfico de dispersión 4D')
-    ax2.set_xlabel('Variable X')
-    ax2.set_ylabel('Variable Y')
+    ax2.set_xlabel('Variable 1')
+    ax2.set_ylabel('Variable 2')
     fig.colorbar(disp4d, ax=ax2)
 
     # Diagrama de dispersión 5D (x, y, z, size, color)
     z = np.random.random(100)
     disp5d = ax3.scatter(x, y, z, c=colors, s=sizes, cmap='viridis', alpha=0.6)
     ax3.set_title('Gráfico de dispersión 5D')
-    ax3.set_xlabel('Variable X')
-    ax3.set_ylabel('Variable Y')
-    ax3.set_zlabel('Variable Z')
+    ax3.set_xlabel('Variable 1')
+    ax3.set_ylabel('Variable 2')
+    ax3.set_zlabel('Variable 3')
     fig.colorbar(disp5d, ax=ax3)
 
     # Gráfico de superfície 3D
@@ -163,16 +167,16 @@ def graficos_multivariantes() -> None:
     z = np.sin(np.sqrt(x**2 + y**2))
     superficie = ax4.plot_surface(x, y, z, cmap='coolwarm', edgecolor='none')
     ax4.set_title('Gráfico de superfície 3D')
-    ax4.set_xlabel('Variable X')
-    ax4.set_ylabel('Variable Y')
-    ax4.set_zlabel('Variable Z')
+    ax4.set_xlabel('Variable 1')
+    ax4.set_ylabel('Variable 2')
+    ax4.set_zlabel('Variable 3')
     plt.colorbar(superficie, ax=ax4, label='Valor de Z')
 
     plt.show()
 
 
 if __name__ == '__main__':
-    graficos_univariantes()
-    graficos_bivariantes()
-    graficos_multivariantes()
+    graficos_univariantes(tamaño = TAMAÑO)
+    graficos_bivariantes(tamaño = TAMAÑO)
+    graficos_multivariantes(tamaño = TAMAÑO)
     # TODO: Add world map visualization like https://stackoverflow.com/questions/72598996/indexerror-too-many-indices-for-array-array-is-1-dimensional-but-2-were-index

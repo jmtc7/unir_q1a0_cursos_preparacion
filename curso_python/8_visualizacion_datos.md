@@ -46,11 +46,11 @@ plt.show()  # Mostrar gráfico
 
 Cuando se creanfiguras, ya sea con `plt.figure()` o con `plt.subplots()`, se puede elegir el tamaño de la misma utilizando el argumento `figsize`, que recibe una tupla con el ancho y alto de la figura en pulgadas. Por otro lado, la función `plt.tight_layout()` permite ajustar los márgenes y espacios para evitar que los títulos y etiquetas de la figura se superpongan.
 
-Respecto a los **tipos de gráficos**, en las siguientes imágenes se muestran los tipos de gráficos univariantes, bivariantes y multivariantes que propone `Matplotlib` (el código para generarlos está en [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py)). Es necesario precisar que para utilizar los gráficos en 3D, se necesita utilizar el módulo `mpl_toolkits.mplot3d` e inicializar un objeto `Axes3D`.
+Respecto a los tipos de gráficos, en las siguientes imágenes se muestran algunos de los tipos de **gráficos univariantes, bivariantes y multivariantes** que propone `Matplotlib` (el código para generarlos está en [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py)). Es necesario precisar que para utilizar los gráficos en 3D, se necesita utilizar el módulo `mpl_toolkits.mplot3d` e inicializar un objeto `Axes3D`.
 
-<img src="imgs/8_visualizacion__graficos_univariantes.png" width="1000">
-<img src="imgs/8_visualizacion__graficos_bivariantes.png" width="1000">
-<img src="imgs/8_visualizacion__graficos_multivariantes.png" width="1000">
+<img src="imgs/8_visualizacion__matplotlib_0_graficos_univariantes.png" width="1000">
+<img src="imgs/8_visualizacion__matplotlib_1_graficos_bivariantes.png" width="1000">
+<img src="imgs/8_visualizacion__matplotlib_2_graficos_multivariantes.png" width="1000">
 
 En el script [actividades/seccion8_graficos_matplotlib.py](actividades/seccion8_graficos_matplotlib.py) se utiliza `plt.subplots()` para organizar **múltiples visualizaciones** en una sola figura. Sin embargo, `Matplotlib` ofrece un control más detallado mediante:
 - `plt.subplots_adjust()` y sus parámetros `wspace` y `hspace`, que controlan el espacio entre subplots.
@@ -90,11 +90,34 @@ Las principales gráficas disponibles en `Seaborn` son:
 - El `jointplot` muestra al mismo tiempo las **distribuciones univariante y bivariante** de dos variables.
 - Las **facetas y grids** crean **gráficos de múltiples subgrupos de datos**, facilitando la comparación entre categorías. `catplot` y `relplot` crean gráficos complejos.
 
+Respecto a los tipos de gráficos, en las siguientes imágenes se muestran algunos de los tipos de **gráficos univariantes, bivariantes y multivariantes** que propone `Seaborn` (el código para generarlos está en [actividades/seccion8_graficos_seaborn.py](actividades/seccion8_graficos_seaborn.py)).
 
-Otro tipo de visualización son los **pares de gráficos** o *pairplots*, que consisten en combinar múltiples variables (4 en el ejemplo) y representar un gráfico de dispersión para cada posible combinación de variables, generando una matriz de gráficos. La **diagonal** de dicha matriz suele ser un histograma que represente la distribución de valores de cada variable. `Seaborn` permite utilizar una **variable categórica** para colorear los puntos, lo que puede ser útil si las muestras de cada variable pertenecen a categorías diferenciadas. Aquí se muestran ejemplos de ambos casos (el código también está en [actividades/seccion8_graficos_seaborn.py](actividades/seccion8_graficos_seaborn.py)):
+<img src="imgs/8_visualizacion__seaborn_0_graficos_univariantes.png" width="1000">
+<img src="imgs/8_visualizacion__seaborn_1_graficos_bivariantes.png" width="1000">
+<img src="imgs/8_visualizacion__seaborn_2_graficos_multivariantes.png" width="1000">
 
-<img src="imgs/8_visualizacion__pairplot.png" height="600">
+Además, es posible combinar varios de estos gráficos utilizando `jointplots`. Por ejemplo, aquí se muestra un gráfico de distribución junto a su regresión lineal y, además, se muestran las distribuciones independientes de cada variable como histograma con sus correspondientes KDEs en cada eje:
+
+<img src="imgs/8_visualizacion__seaborn_3_jointplot.png" width="800">
+
+Otro tipo de visualización son los **pares de gráficos** o *pairplots*, que consisten en combinar múltiples variables (4 en el ejemplo) y representar un gráfico de dispersión para cada posible combinación de variables, generando una matriz de gráficos. La **diagonal** de dicha matriz suele ser un histograma que represente la distribución de valores de cada variable. `Seaborn` permite utilizar una **variable categórica** para colorear los puntos, lo que puede ser útil si las muestras de cada variable pertenecen a categorías diferenciadas. Aquí se muestran ejemplos de ambos casos:
+
+<img src="imgs/8_visualizacion__seaborn_4_pairplot.png" width="800">
+
+Como nota adicional, cuando trabajamos con conjuntos de datos con **muchas variables**, es muy útil dividir los gráficos en varios `subplots` o, si queremos utilizar el mismo gráfico, utilizar `relplot()` para crearlos en `FacetGrid`, lo que permite dividir el gráfico según categorías adicionales:
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+datos = sns.load_dataset('tips')
+sns.relplot(data=datos,
+            x='total_bill',  # Variable 1
+            y='tip',         # Variable 2
+            hue='day',       # Variable 3
+            size='size',     # Variable 4
+            col='time',      # Por cada valor de 'time', crear un gráfico en una columna nueva
+            kind='scatter')  # Gráfico de dispersión
+plt.show()
+```
 
 Para **mostrar y guardar los gráficos** generados, se utilizan las mismas funciones que en `Matplotlib`. Es decir, `plt.show()` y `plt.savefig()`. Los **parámetros de estilo** y personalización también son comunes, lo que permite mantener un estilo consistente entre ambos módulos. Si se crearon **varios ejes y subplots** con `Matplotlib`, las funciones gráficas de `Seaborn` aceptan el parámetro `ax` para especificar en qué eje deben mostrarse.
-
-# TODO: crear script que muestre todas las funciones (esperar a secciones univariante, bivariante y multivariante?)
