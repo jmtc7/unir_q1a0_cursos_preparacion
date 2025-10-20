@@ -9,3 +9,4 @@ ID_Tienda,Producto,Cantidad_Vendida,Precio_Unitario,Fecha_Venta
 4,Producto A,25,100,2023-01-12
 5,Producto B,20,200,2023-01-13
 5,Producto C,30,300,2023-01-14
+5,Producto D,9,300,2023-01-14
