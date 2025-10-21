@@ -11,5 +11,7 @@ Este curso está dividido en las siguientes secciones:
 7. **Introducción a R Markdown**
 8. **R y Bases de Datos**
 
+Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. Algunos títulos en dichos ficheros tienen links asociados a los vídeos donde se profundiza en los detalles de las secciones correspondientes. También existe una carpeta `actividades/` que contienen los ejercicios prácticos realizados para este curso.
+
 ## Actividades
 TODO
