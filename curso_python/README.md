@@ -29,4 +29,13 @@ Este curso está dividido en las siguientes secciones:
 > 
 > ** Tiene notas parciales o extendidas con respecto al contenido del curso.
 
-Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. También existe una carpeta `actividades/` que contienen los ejercicios prácticos realizados y entregados para este curso.
+Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. También existe una carpeta `actividades/` que contienen los ejercicios prácticos realizados para este curso, así como algunos scripts con código de ejemplo para las secciones 7 y 8 del curso.
+
+## Actividades
+El contenido de la carpeta `actividades/` se divide en:
+- **Actividad 1: Calculadora de promedios**: Aplicación que permite calcular promedios y obtener información sobre calificaciones académicas a través de una CLI. Incorpora gestión de errores.
+- **Actividad 2: Sistema de inventario**: Aplicación que permite gestionar un inventario a través de una CLI y una estructura de clases, incorporando gestión de errores.
+- **Actividad 3: Análisis de una red de tiendas**: Se procesan varios archivos CSV con información sobre ventas, inventario y satisfacción de clientes de varias tiendas. Se obtienen varias estadísticas divididas por tienda y tipo de producto, algunas de ellas combinando la información obtenida de distintos ficheros. Se usa `NumPy` y `Pandas`.
+- **Actividad 4: Visualizaciones**: Muestra varias visualizaciones con `Matplotlib` y `Seaborn` de un conjunto de datos almacenado en un CSV, que es procesado con `Pandas`.
+- **Script de ejemplo de la sección 7**: Muestra cómo hacer varias operaciones con `NumPy` y `Pandas`.
+- **Scripts de ejemplo de la sección 8**: Hay dos, uno que utiliza `Matplotlib` y otro que utilizar `Seaborn`. Ambos muestran cómo hacer subplots, personalizar las gráficas y crear gráficos univariantes, bivariantes y multivariantes.
