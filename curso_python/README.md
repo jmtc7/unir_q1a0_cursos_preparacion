@@ -39,3 +39,4 @@ El contenido de la carpeta `actividades/` se divide en:
 - **Actividad 4: Visualizaciones**: Muestra varias visualizaciones con `Matplotlib` y `Seaborn` de un conjunto de datos almacenado en un CSV, que es procesado con `Pandas`.
 - **Script de ejemplo de la sección 7**: Muestra cómo hacer varias operaciones con `NumPy` y `Pandas`.
 - **Scripts de ejemplo de la sección 8**: Hay dos, uno que utiliza `Matplotlib` y otro que utilizar `Seaborn`. Ambos muestran cómo hacer subplots, personalizar las gráficas y crear gráficos univariantes, bivariantes y multivariantes.
+- **requirements.txt**: Fichero con la lista de dependencias a instalar para poder ejecutar todos los scripts y iPythonNotebooks en la carpeta. Las versiones utilizadas para desarrollar y testear dichos scripts están especificadas.
