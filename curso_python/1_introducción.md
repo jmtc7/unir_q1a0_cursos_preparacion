@@ -1,5 +1,4 @@
 # Introducción
-
 ## 1. Introducción
 Los objetivos del curso son:
 - Contextualizar Python desde su historia y sus características.

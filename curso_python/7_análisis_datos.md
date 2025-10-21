@@ -1,5 +1,4 @@
 # Análisis de Datos
-
 ## 1. Introducción
 En este tema, describiremos las principales funcionalidades de los dos módulos más importantes para manejar datos en Python: `NumPy` y `Pandas`. Esto incluirá:
 - Estructuras de datos básicas de `NumPy`: *arrays* y *matrices*.
