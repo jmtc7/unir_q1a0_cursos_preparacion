@@ -28,7 +28,7 @@ El último panel contiene las siguientes pestañas:
 
 ## 3. Variables y Tipos
 La asignación de valores a variables en R se puede realizar de tres maneras: `x = 10`, `x <- 10` o `10 -> x`, pero la forma tradicional es `x <- 10` (o `x = 10` cuando se pasan argumentos a funciones). Al igual que en Python, todo son objetos (variables, funciones, etc.). Los elementos más básicos se denominan **objetos atómicos** y son:
-- `character`: Caracteres individuales y cadenas de texto.
+- `character`: Caracteres individuales y cadenas de texto. Aunque R soporta las comillas simples ('), por convención, se usan las dobles (").
 - `numeric`: Todos los tipos numéricos (enteros, con coma flotante, expresados en notación exponencial, constantes `Inf` y `NaN`, etc.).
 - `integer`: Por defecto, en R todos los números se tratan como `double`. Para crear enteros, debemos utilizar `as.integer()`.
 - `complex`: Valores con parte imaginaria (denotada por el sufijo `i`).
@@ -46,7 +46,7 @@ En RStudio utilizamos el **editor de sintaxis** para crear y editar scripts. Est
 ## [5. Proyectos](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=335d7c45-9231-45cb-9552-af1800cdf339)
 Los proyectos permiten organizar el trabajo en R en carpetas. Se pueden crear nuevos proyectos desde la pestaña `File` en la barra superior de RStudio. Al crear un nuevo proyecto, el **directorio de trabajo** será la carpeta del proyecto. Además, dentro de dicha carpeta se habrá creado un archivo `.Rproj`, que será el archivo a abrir si queremos abrir el proyecto.
 
-## [6. Biblioteca de R para Administrar Paquetes](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a350a466-bd71-4f37-a3e8-af19009fbd7a)
+## [6. Biblioteca de R y Paquetes](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a350a466-bd71-4f37-a3e8-af19009fbd7a)
 A menudo vamos a necesitar funcionalidades que no están disponibles nativamente en R. Es por ello que utilizamos los **paquetes externos**. Como ejemplo, usaremos el paquete [datos](https://cran.r-project.org/web/packages/datos/readme/README.html), que es la versión en español de unos datos que se suelen usar para hacer ejemplos en R. Si conocemos el nombre exacto del paquete a **instalar**, podemos ejecutar la **función** `insta.packages("datos", dependencies = TRUE)`. El argumento `dependencies` permite elegir si queremos descargar las dependencias del paquete o no. Si no conocemos el nombre exacto del paquete, podemos utilizar el **instalador del explorador de paquetes**, que permite buscar. También ofrece la opción de instalar o no las dependencias del paquete mediante un *checkbox*. La última opción es utilizar la opción `Tools/Install Packages/`, que abrirá la misma interfaz que el explorador de paquetes.
 
 Una vez hemos instalado un paquete, podemos **cargarlo** utilizando `library(datos)`. Tras hacer eso, en la ventana del explorador de paquetes veremos nuestro paquete seleccionado. Otra opción es seleccionarlo en el explorador de paquetes. Como clarificación, la ***librería*** a la que se refiere la función `library()` es la carpeta de nuestro ordenador en la que se almacenan todos los paquetes instalados. Los paquetes NO son librerías. Los paquetes están contenidos en la librería de nuestro sistema.

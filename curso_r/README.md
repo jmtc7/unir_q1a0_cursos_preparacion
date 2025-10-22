@@ -4,7 +4,10 @@ Este curso está dividido en las siguientes secciones:
    1. Instalación
    2. Utilización Básica
 2. [**Conceptos Básicos**](2_conceptos_básicos.md)
-3. **Estructuras de Datos**
+   1. RStudio
+   2. Scripts y Proyectos
+   3. Biblioteca de R y Paquetes
+3. [**Estructuras de Datos**](3_estructuras_de_datos.md)
 4. **Programación Básica**
 5. **Manejo de Datos**
 6. **Visualización de Datos**

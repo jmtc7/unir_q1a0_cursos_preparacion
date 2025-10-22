@@ -31,7 +31,7 @@ sudo apt install --no-install-recommends r-base
 Tras instalar R, se puede proceder a **instalar RStudio**. Para hacerlo, accede a la [web oficial](https://posit.co/download/rstudio-desktop/) y descarga y ejecuta el instalador que corresponda a tu sistema operativo. Por ejemplo, para Ubuntu 22 sería `sudo dpkg -i rstudio-2025.09.1-401-amd64.deb`.
 
 ## 3. Utilización Básica
-En R, los comentarios empiezan con `#`. Por claridad, los resultados obtenidos por consola se mostrarán precedidos de `##`. Por ejemplo:
+En R, los comentarios empiezan con `#`. Se suelen dejar al menos dos espacios entre las líneas de código y el inicio del comentario. Por claridad, los resultados obtenidos por consola se mostrarán precedidos de `##`. Por ejemplo:
 ```r
 # Asignar variables (todos son equivalentes)
 x = 10
