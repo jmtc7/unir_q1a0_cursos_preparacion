@@ -8,7 +8,16 @@ Este curso está dividido en las siguientes secciones:
    2. Scripts y Proyectos
    3. Biblioteca de R y Paquetes
 3. [**Estructuras de Datos**](3_estructuras_de_datos.md)
-4. **Programación Básica**
+   1. Vectores y Factores
+   2. Listas
+   3. Matrices
+   4. Data frames
+   5. Arrays
+4. [**Programación Básica**](4_programación_básica.md)
+   1. Operadores y Funciones Matemáticas
+   1. Estructuras Condicionales
+   2. Estructuras Iterativas
+   3. Funciones y Argumentos
 5. **Manejo de Datos**
 6. **Visualización de Datos**
 7. **Introducción a R Markdown**

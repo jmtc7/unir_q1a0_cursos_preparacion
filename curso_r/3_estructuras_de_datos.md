@@ -74,9 +74,9 @@ rep(1:3, each = 2, length.out = 9)  # (1, 1, 2, 2, 3, 3, 1, 1, 2) -> Repetir cad
 rep(1:3, times = c(2, 3, 1))        # (1, 1, 2, 2, 2, 3) -> Repetir el 1 2 veces, el 2 3 veces y el 3 1 vez.
 
 # Utilizlar constructores y wrappers
-v1 <- vector(mode = "logical", length = 3)    # Crear vector con 3 elementos de tipo "logical" (por defecto a FALSE)
-v2 <- vector(mode = "numerical", length = 3)  # Crear vector con 3 elementos de tipo "numerical" (por defecto a 0)
-v3 <- vector(mode = "character", length = 3)  # Crear vector con 3 elementos de tipo "character" (por defecto a "")
+v2 <- vector(mode = "numeric", length = 3)    # Crear vector con 3 elementos de tipo "numeric" (por defecto a 0) - equivale a numeric(3)
+v1 <- vector(mode = "logical", length = 3)    # Crear vector con 3 elementos de tipo "logical" (por defecto a FALSE) - equivale a logical(3)
+v3 <- vector(mode = "character", length = 3)  # Crear vector con 3 elementos de tipo "character" (por defecto a "") - equivale a character(3)
 
 # Equivalentes a las instrucciones anteriores
 v11 <- logical(3)
@@ -299,6 +299,3 @@ a1[, , 2]    # 2a matriz
 length(a1)  # Cantidad de elementos en un array (24)
 dim(a1)     # Dimensión del array (3, 4, 2)
 ```
-
-# TODO - Revisar en PDF:
-data frames, página 40 - tibbles (pág. 60)
