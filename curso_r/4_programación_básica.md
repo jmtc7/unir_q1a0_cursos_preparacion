@@ -112,7 +112,7 @@ Aunque R no está estríctamente estandarizado, es conveniente seguir alguna **g
 - Al declarar condiciones, bucles o funciones, abrir la llave (`{`) en la misma línea de la declaración y cerrarla (`}`) en una nueva línea vacía.
 
 ## [5. Ejercicios (pág. 58)](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=62e9b786-74c1-450f-8173-af1c011e97a5)
-En este tema, se proponen 6 ejercicios para asegurar la comprensión de los conceptos presentados. Estos están resueltos en el archivo [actividades/ejercicios_tema4_programación_básica.R] y en el vídeo cuyo enlace está en el título de esta subsección se presentan las soluciones oficiales a los ejercicios 4 y 5.
+En este tema, se proponen 6 ejercicios para asegurar la comprensión de los conceptos presentados. Estos están resueltos en el archivo [actividades/ejercicios_tema4_programación_básica.R](actividades/ejercicios_tema4_programación_básica.R) y en el vídeo cuyo enlace está en el título de esta subsección se presentan las soluciones oficiales a los ejercicios 4 y 5.
 
 Mis **conclusiones** tras comparar mis soluciones a las soluciones propuestas por la profesora son:
 - Los conocimientos básicos están adquiridos, pude crear funciones y utilizar estructuras de control y de datos sin problema.

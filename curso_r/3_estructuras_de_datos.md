@@ -207,7 +207,7 @@ Podemos utilizar las funciones `dim()`, `ncol()`, `nrow()` y `length()` para obt
 - **Sumas y restas** elemento a elemento con `+` y `-`.
 - **Producto** celemento a elemento con `*`.
 - **Producto matricial** con el operador `%*%`. La cantidad de filas de la primera matriz debe ser igual a la cantidad de columnas de la segunda.
-  - Similarmente, `^` eleva todos los elementos de la matriz, mientras que `%^%` realiza la versión matricial de dicha operación. Estas operaciones están implementadas en el paquete `expm`. Otra opción es utilizar la función `matrix.power()` del paquete `matrixcalc`.
+  - Similarmente, `^` eleva todos los elementos de la matriz, mientras que `%^%` realiza la versión matricial de dicha operación. Estas operaciones están implementadas en el paquete `{expm}`. Otra opción es utilizar la función `matrix.power()` del paquete `{matrixcalc}`.
 - **Transposición** de filas por columnas y viceversa con la función `t()`.
 - **Determinante** de una matriz cuadrada con la función `det()`.
 - **Inversa** de una matriz cuadrada invertible con la función `solve()`.
@@ -279,7 +279,7 @@ df$sexo <- factor(df$sexo)  # Transformar la columna sexo a factor (summary() di
 
 R ofrece una serie de **conjuntos de datos nativos** que pueden verse ejecutando `data()`. Están en forma de data frames y uno de los más populares es el `iris data set`, que contiene información sobre flores. Para ver sus primera filas podemos ejecutar `head(iris, 4)` y, para más detalles, `?iris`.
 
-Actualmente, existen **variantes más modernas** de los data frames, como los ***data tables*** del paquete `data.table` o los ***tibbles*** del `tibble` (forma parte de la colección `tidyverse`). Los **data tables** ocupan menos espacio que los data frames, mejoran el tiempo de ejecución al trabajar con CSVs y añaden funciones como `group_by()` para ordenar las tablas, entre otras. Son compatibles con las funciones para los data frames *normales*. Respecto a los **tibbles**, se verán en más profundidad en el [tema 5](5_manejo_de_datos.md).
+Actualmente, existen **variantes más modernas** de los data frames, como los ***data tables*** del paquete `{data.table}` o los ***tibbles*** del `tibble` (forma parte de la colección `tidyverse`). Los **data tables** ocupan menos espacio que los data frames, mejoran el tiempo de ejecución al trabajar con CSVs y añaden funciones como `group_by()` para ordenar las tablas, entre otras. Son compatibles con las funciones para los data frames *normales*. Respecto a los **tibbles**, se verán en más profundidad en el [tema 5](5_manejo_de_datos.md).
 
 ### 3.5. Arrays Multidimensionales (pág. 37)
 Los arrays son como bloques de varias matrices. Son **multidimensionales y homogéneos**, ya que solo pueden contener **objetos atómicos**. Su uso se asemeja mucho al de las matrices:

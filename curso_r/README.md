@@ -18,12 +18,17 @@ Este curso está dividido en las siguientes secciones:
    1. Estructuras Condicionales
    2. Estructuras Iterativas
    3. Funciones y Argumentos
-5. **Manejo de Datos**
+5. [**Manejo de Datos**](4_manejo_de_datos.md)
+   1. Importar Datos R, TXT, CSV, Excel, SAS, SPSS y Stata
+   2. Exportar Datos R, TXT, CSV y Excel
+   3. Introducción al Tidyverse
 6. **Visualización de Datos**
 7. **Introducción a R Markdown**
 8. **R y Bases de Datos**
 
-Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. Algunos títulos en dichos ficheros tienen links asociados a los vídeos donde se profundiza en los detalles de las secciones correspondientes. También existe una carpeta `actividades/` que contienen los ejercicios prácticos realizados para este curso.
+Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. Algunos títulos en dichos ficheros tienen links asociados a los vídeos donde se profundiza en los detalles de las secciones correspondientes
+
+También existen la **carpeta** `actividades/`, que contiene los **ejercicios prácticos** realizados para este curso. Dentro de ella encontramos otra subcarpeta, `datos/`, que contiene varios archivos con **datos** en formato CSV y TXT para los ejercicios del curso.
 
 ## Actividades
 TODO
