@@ -18,11 +18,14 @@ Este curso está dividido en las siguientes secciones:
    1. Estructuras Condicionales
    2. Estructuras Iterativas
    3. Funciones y Argumentos
-5. [**Manejo de Datos**](4_manejo_de_datos.md)
+5. [**Manejo de Datos**](5_manejo_de_datos.md)
    1. Importar Datos R, TXT, CSV, Excel, SAS, SPSS y Stata
    2. Exportar Datos R, TXT, CSV y Excel
    3. Introducción al Tidyverse
-6. **Visualización de Datos**
+6. [**Visualización de Datos**](6_visualización_de_datos.md)
+   1. Gráficos Básicos con plot() y Superposición de Elementos
+   2. Otros Gráficos con hist(), boxplot() y barplot()
+   3. Gŕaficos de GGPlot2
 7. **Introducción a R Markdown**
 8. **R y Bases de Datos**
 
