@@ -1,4 +1,4 @@
-# Ejercicios del tema 4: Programación Básica
+# Ejercicios del tema 4: Programación Básica #
 
 # EJERCICIO 1: Determinar calificación de un alumno dada su nota numérica
 # 0-5 suspenso, 5-7 aprobado, 7-9 notable, 9-10 sobresaliente
@@ -15,8 +15,7 @@ print(califs)  # [OK]
 
 # EJERCICIO 2: Predecir el valor de 'x'
 # Respuesta: 3, porque la función es definida, pero no llamada.
-cat("\n")  # Imprimir línea vacía
-print("EJERCICIO 2")
+cat("\nEJERCICIO 2\n")
 
 x <- 3
 my_func <- function(y) {
@@ -30,8 +29,7 @@ print(x)  # [OK]
 # EJERCICIO 3: Programar el cálculo del número inverso del producto de dos
 # números a y b y el número inverso de la suma de dichos números. Se debe
 # verificar si el inverso existe.
-cat("\n")  # Imprimir línea vacía
-print("EJERCICIO 3")
+cat("\nEJERCICIO 3\n")
 
 calcular_inversos <- function(a, b) {
   producto <- a * b
@@ -52,8 +50,7 @@ print(calcular_inversos(1, -1))  # Solo 1 inverso existe [OK]
 # EJERCICIO 4: Escribir una función con 1 argumento que sume todos los cuadrados
 # de todos los números desde 1 hasta n y otra función que haga lo mismo pero que
 # cada número esté elevado a sí mismo.
-cat("\n")  # Imprimir línea vacía
-print("EJERCICIO 4")
+cat("\nEJERCICIO 4\n")
 
 cuadrados_n <- function(n) {
   # Solución propuesta: sum((1:n)^2)
@@ -91,8 +88,8 @@ print(comprobar_identidad(5))  # [OK] TRUE
 # EJERCICIO 5: Definir un vector vacío de 30 elementos donde se almacenen los 
 # resultados de usar la función cuadrados_n() del ejercicio 4 utilizando un 
 # bucle for. Repetir lo mismo utilizando sapply().
-cat("\n")  # Imprimir línea vacía
-print("EJERCICIO 5")
+cat("\nEJERCICIO 5\n")
+
 # Otras opciones: vector("numeric", 30) o rep(NA, 30)
 s_n1 <- numeric(30)  # Elementos a 0 por defecto
 print(s_n1)
@@ -110,8 +107,7 @@ print(s_n2)  # [OK] - (1, 5, 14, ..., 7714, 8555, 9455)
 
 
 # EJERCICIO 6: Escribir una función que resuelva una ecuación de segundo grado
-cat("\n")  # Imprimir línea vacía
-print("EJERCICIO 6")
+cat("\nEJERCICIO 6\n")
 
 # a*x + b = 0
 resolver_1er_grado <- function(a, b) {
