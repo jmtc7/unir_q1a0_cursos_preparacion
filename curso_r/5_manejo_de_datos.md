@@ -1,9 +1,11 @@
 # Manejo de Datos
+
 ## 1. Introducción
 Los objetivos de este tema son:
 - Importar y exportar ficheros de datos en R desde ficheros TXT, CSV, Excel y para programas comerciales como SAS, SPSS o Stata.
 - Usar las principales acciones de manipulación de data frames con *pipes* en `dplyr`.
 - Comprender cómo combinar `group_by()` y `summarize()` para obtener resúmenes de datasets.
+
 
 ## [2. Importar Datos (pág. 4)](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=158e7ec6-7537-4ad4-8450-af1d00d05914)
 Podemos importar datos de **archivos TXT** utilizando `read.table()`, que espera un archivo formateado como una tabla y que generará un data frame con los datos contenidos en él. Los argumentos principales de esta función son:
@@ -46,8 +48,10 @@ Otras formas de importar datos son paquetes como `{DBI}` o `{dplyr}` para **base
 
 Un **paquete clave para importar datos** es `{readr}`, que forma parte del `{tidyvese}` (incluye 8 paquetes). Para usarlo, podemos instalar cualquiera de ellos. Su principal función es convertir un fichero de datos en un data frame de R. Incluye funciones para leer ficheros TXT y CSV, todas llamadas `read_*()` y con los mismos argumentos disponibles, aunque con distintos valores por defecto, como las ya mencionadas anteriormente (`read.table()`, `read.csv()`, etc.).
 
+
 ## 3. Leer Datos desde un Paquete (pág. 24)
 R ofrece datos contenidos en paquetes cuyo objetivo suele ser practicar con las funciones de dichos paquetes. Uno de estos paquetes es `{datasets}`, que viene instalado por defecto. Para ver todos sus datasets podemos ejecutar `data(package = "datasets")`. Si no especificásemos `package`, obtendríamos todos los datasets de todos los paquetes disponibles en la sesión actual. Para utilizar cualquiera de estos datasets, basta con llamarlos por su nombre como si fuesen una variable más.
+
 
 ## 4. Exportar Datos (pág. 25)
 Para **guardar todo el espacio de trabajo**, se utiliza la función `save.image()`, que guardará todas las variables existentes en un archivo `.RData`. Si solo queremos guardar **algunos objetos** pero no todos, se usa `save()`, enumerando los objetos a guardar separados por comas. Si solo vamos a guardar **un único objeto** (como listas), se utiliza `saveRDS()` y un archivo con la extensión `.rds`. Todos estos archivos son binarios y pueden volver a abrirse desde RStudio.
@@ -62,6 +66,7 @@ Para escribir un **fichero TXT** se utiliza `write.table()`. Los argumentos más
 Similarmente, para exportar a un **fichero CSV**, se utiliza `write.csv()` (si se quiere utilizar `;` como separador en vez de `,`, se usa `write.csv2()`).
 
 Finalmente, para **ficheros Excel** se utiliza `write_xlsx()`, del paquete `{writexl}`.
+
 
 ## 5. Introducción al Tidyverse (pág. 32)
 Los principios del ***Tidyverse*** son ordenar los datos con **una columna por variable y una fila por observación**. Para representar datos con ese estándar en R, utilizamos data frames o tibbles. Esta es su [web oficial](https://tidyverse.org/).
@@ -112,6 +117,7 @@ datos %>% summarize(across(where(is.numeric), list(media=mean, desvio=sd)))  # A
 datos %>% group_by(SEXE) %>% summarize(across(taille, mean))       # Agrupadar "taille"  por género y aplicar media
 datos %>% group_by(SEXE) %>% summarize(media=mean(taille), n=n())  # Calcular media y contar cuántas "taille" hay por género
 ```
- 
+
+
 ## [6. Ejercicios (pág. 43)](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=84c346d9-e210-43f3-87a8-af1f008595f7)
 En este tema, se proponen 5 ejercicios para asegurar la comprensión de los conceptos presentados. Estos están resueltos en el archivo [actividades/ejercicios_tema5_manejo_de_datos.R](actividades/ejercicios_tema5_manejo_de_datos.R) y en el vídeo cuyo enlace está en el título de esta subsección se presenta la soluciones oficial al ejercicio 4.

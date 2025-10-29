@@ -25,7 +25,7 @@ Este curso está dividido en las siguientes secciones:
 6. [**Visualización de Datos**](6_visualización_de_datos.md)
    1. Gráficos Básicos con plot() y Superposición de Elementos
    2. Otros Gráficos con hist(), boxplot() y barplot()
-   3. Gŕaficos de GGPlot2
+   3. Gŕaficos con {GGPlot2}
 7. **Introducción a R Markdown**
 8. **R y Bases de Datos**
 

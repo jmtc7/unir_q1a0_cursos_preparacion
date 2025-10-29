@@ -1,9 +1,11 @@
 # Programación Básica
+
 ## 1. Introducción
 El objetivo de este tema es ser capaces de:
 - Controlar la ejecución de código con la ayuda de las estructuras condicionales if() y else().
 - Ejecutar bloques de código repetidamente mediante estructuras iterativas (bucles for()).
 - Definir funciones sencillas que utilicen argumentos
+
 
 ## 2. Operadores (pág. 4)
 Los operadores se pueden clasificar en los siguientes tipos:
@@ -14,6 +16,7 @@ Los operadores se pueden clasificar en los siguientes tipos:
 - **Otros**: `$` (acceso a variables de data frames), `:` (generar sucesiones de números), `::` (acceso a funciones de paquetes), `%in%` (verificar si un elemento se encuentra en un vector) y `~` (formulación de modelos).
 
 Ciertas operaciones matemáticas no tienen un operador asignado, pero están implementadas como una función. Por ejemplo: `sqrt()`, `exp()`, `log()`, `log10()`, `log(,a)`, `factorial()`, `choose()`, `sin()`, `cos()`, `tan()`, `asin()`, `acos()`, `atan()` y `abs()`, 
+
 
 ## 3. Estructuras de Control (pág. 14)
 Permiten controlar la manera en la que se ejecuta el código. Se dividen en:
@@ -110,6 +113,7 @@ Aunque R no está estríctamente estandarizado, es conveniente seguir alguna **g
 - Utilizar espacios y no tabuladores para indentar bloques de código.
 - Utilizar 2 espacios (4 sólo se usaban en proyectos antiguos) para indentar.
 - Al declarar condiciones, bucles o funciones, abrir la llave (`{`) en la misma línea de la declaración y cerrarla (`}`) en una nueva línea vacía.
+
 
 ## [5. Ejercicios (pág. 58)](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=62e9b786-74c1-450f-8173-af1c011e97a5)
 En este tema, se proponen 6 ejercicios para asegurar la comprensión de los conceptos presentados. Estos están resueltos en el archivo [actividades/ejercicios_tema4_programación_básica.R](actividades/ejercicios_tema4_programación_básica.R) y en el vídeo cuyo enlace está en el título de esta subsección se presentan las soluciones oficiales a los ejercicios 4 y 5.

@@ -1,6 +1,8 @@
 # Estructuras de Datos
+
 ## 1. Introducción
 En este tema se presentarán las estructuras de datos más comunes en R, como los vectores, las matrices, las listas y los data frames. Veremos cómo crearlos, recuperar valores almacenados en ellos, modificarlos, etc.
+
 
 ## [2. Tipos de Objetos](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=16c19a6b-c601-490a-abbb-af190122c62a)
 Todo en R son **objetos**. Los objetos pertenecen a una **clase** y están constituidos por objetos más básicos, hasta llegar a los **objetos atómicos** explicados en el [Tema 1](2_conceptos_básicos.md). El siguiente snippet repasa los conceptos esenciales:
@@ -13,6 +15,7 @@ y <- 1L # Especificar que queremos que sea un entero (también podría con as.in
 class(x) # Devolverá "integer"
 type(x) # Devolverá "integer"
 ```
+
 
 ## [3. Estructuras de Datos](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f23d04a9-661c-467f-b9f8-af1c00763dbf)
 Las estructuras de datos en R se organizan según su **dimensión** (una, dos o más dimensiones) y según si son **homogéneas o heterogéneas** (si todos los datos que contienen son del mismo tipo y clase o si pueden cambiar, respectivamente):

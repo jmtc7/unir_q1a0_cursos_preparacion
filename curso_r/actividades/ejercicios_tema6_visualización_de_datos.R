@@ -78,13 +78,13 @@ mis_paises2 <- paises %>%
             esperanza_de_vida_max = max(esperanza_de_vida))
 
 print(ggplot(mis_paises2, aes(x = anio, color = continente)) +
-        geom_line(aes(y = esperanza_de_vida_media, linetype = "solid")) +
-        geom_line(aes(y = esperanza_de_vida_max, linetype = "dashed")) +
+        geom_line(aes(y = esperanza_de_vida_media, linetype = "Media")) +
+        geom_line(aes(y = esperanza_de_vida_max, linetype = "Máxima")) +
+        scale_linetype_manual(name = "Esperanza de vida",
+                              values = c("Media" = "solid", "Máxima" = "dashed")) +
         ggtitle(label = 'Ejercicio 4') +
         xlab("Año") +
         ylab("Esperanza de vida"))
-
-# TODO - Personalizar leyendas (esperanza max vs media)
 
 
 # EJERCICIO 5: Con los datos "mpg" de {ggplot2} generar un gráfico de caja y 
@@ -92,20 +92,19 @@ print(ggplot(mis_paises2, aes(x = anio, color = continente)) +
 print(ggplot(mpg, aes(x = class, y = hwy)) +
         stat_boxplot(geom = "errorbar") +  # Bigotes
         geom_boxplot() +  # Cajas
-        geom_point(stat = "summary", fun = "mean", colour = "red") +  # Media
+        geom_point(stat = "summary", fun = "mean") +  # Media
         geom_point(aes(colour = drv)) +  # Puntos
         ggtitle(label = 'Ejercicio 5') +
         xlab("Clase") +
         ylab("Consumo en autovía"))
 
-# TODO - Adaptar leyenda con "media"
-
 
 # EJERCICIO 6: Con los datos "diamantes" de {datos} generar histogramas con 
 # "precio" con barras violetas con borde gris, un histograma por color de 
 # diamante, cambiar intensidad de color y nombres de ejes en español
-print(ggplot(diamantes, aes(x = precio, colour = "gray", fill = "violet")) +
-        geom_histogram(alpha = 0.5, position = "dodge") +
+print(ggplot(diamantes, aes(x = precio, fill = color)) +
+        geom_histogram(alpha = 0.5, position = "stack",
+                       colour = "gray") +
         ggtitle(label = 'Ejercicio 6') +
         xlab("Precio del diamante") +
         ylab("Frecuencia"))

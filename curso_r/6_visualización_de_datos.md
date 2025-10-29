@@ -1,10 +1,12 @@
 # Visualización de Datos
+
 # 1. Introducción
 R cuenta con funciones para generar gráficos de nubes de puntos, líneas, barras, circulares, etc. También se pueden crear histogramas y curvas de densidad. Estos gráficos son útiles para explorar los datos y encontrar patrones. Todos pueden ser almacenados para reutilizarlos posteriormente.
 
 Los objetivos de este tema son:
 - **Generar gráficos** adaptados al tipo de dato a visualizar (gráficos de barras, histogramas, diagramas de dispersión, diagramas de líneas y diagramas de caja) con R base y el paquete `{ggplot2}`.
 - Entender la **gramática básica de los gráficos**, incluyendo estética, capas geométricas, estadísticas, escalas, colores, etc.
+
 
 # 2. Gráficos Básicos con plot() (pág. 4)
 La función `plot()` permite generar varios tipos de gráfico. Utilizando **dos vectores** con las coordenadas en X y en Y de una serie de puntos se puede obtener un **diagrama de dispersión**. También puede utilizarse para representar una **función**. Algunos de los **argumentos** más útiles de `plot()` son:
@@ -55,6 +57,7 @@ plot(x, y, type = "l",
     main = 'El título', col.main = "#0098CD")  # Título del gráfico
 ```
 
+
 # 3. Añadir Elementos a un Gráfico Existente (pág. 25)
 Con `plot()` podemos crear un gráfico pero, en ocasiones, queremos añadir elementos adicionales a los gráficos existentes. Para ello, se utilizan las siguientes funciones (todas usan los **mismos parámetros de personalización que** `plot()`):
 - `lines()` genera las líneas que unen a los puntos que recibe como argumentos, al igual que `plot(x, y, type = "l")`.
@@ -96,6 +99,7 @@ plot(x, y, pch = 19, col = '#0098CD', ylim = c(0, 0.4), xlim = c(-3,3) )
 # Añadir curva normal estándar
 curve(dnorm(x), col = 'darkgreen', lty = "dashed", add = TRUE)
 ```
+
 
 # 4. Otros Gráficos (pág. 35)
 Los **histogramas** son muy útiles para visualizar las distribuciones de las variables continuas. En R se generan utilizando la función `hist()`. Algunos detalles a considerar son:
@@ -184,6 +188,7 @@ barplot(tabla2C_prop,
 
 En la web [From Data to Viz](https://www.data-to-viz.com/) se pueden explorar más tipos de gráficos junto a un árbol de decisión para escoger cuál es el más apropiado. Además, en la [Galería Gráfica de R](https://r-graph-gallery.com/) podrás encontrar todos los gráficos que se pueden hacer con R junto con ejemplos y visualizaciones.
 
+
 # 5. Gráficos de GGPlot2  (pág. 47)
 El paquete `{ggplot2}` ofrece alternativas a las funciones del R básico para crear gráficos complejos y estéticos más fácilmente. Usa la **gramática de gráficos** y espera recibir tablas de **datos en formato *tidy*** (una variable por columna y una observación por fila). Para usar este paquete es muy útil tener a mano la [guía rápida de GGPLOT2](https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/spanish/data-visualization_es.pdf). Para trabajar con `{ggplot2}` es importante diferenciar entre los **3 elementos principales**:
 - **Datos**: El conjunto de datos a representar.
@@ -267,7 +272,7 @@ ggplot(Cars2020, aes(x = Size, y = Length)) +
     scale_x_discrete(labels=c("Grande", "Mediano", "Pequeño"))  # Size renombrado a "Grande", "Mediano" y "Pequeño"
 ```
 
-Para **histogramas** se utiliza `geom_histogram()` (pág. 68). Por defecto muestran la **frecuencia** con la que un rango de valores aparece en las muestras, pero si se especifica `y = ..density..`, se puede obtener un histograma de **densidades** o de probabilidad. Por defecto, se utilizan **30 bins** (barras o intervalos), configurable con `bins`. Su **ancho** es configurable con `binwidth`. También es posible agrupar las barras basándose en los valores de una **variable categórica**. Al hacer esto, las barras se solapan, por lo que se recomienda utilizar o `position = "identity"` con `alpha` para que tengan algo de transparencia o `position = "dodge"` para que las barras estén contiguas o adosadas. Algunos ejemplos de uso son:
+Para **histogramas** se utiliza `geom_histogram()` (pág. 68). Por defecto muestran la **frecuencia** con la que un rango de valores aparece en las muestras, pero si se especifica `y = ..density..`, se puede obtener un histograma de **densidades** o de probabilidad. Por defecto, se utilizan **30 bins** (barras o intervalos), configurable con `bins`. Su **ancho** es configurable con `binwidth`. También es posible agrupar las barras basándose en los valores de una **variable categórica**. Al hacer esto, las barras se **solapan**, por lo que se recomienda utilizar o `position = "identity"` con `alpha` para que tengan algo de transparencia, `position = "dodge"` para que las barras estén **contiguas** o adosadas o `position = "stack"` para que estén **apliladas**. Algunos ejemplos de uso son:
 ```r
 # Histograma con frecuencias absolutas
 ggplot(Cars2020, aes(x = Length)) +
@@ -331,5 +336,6 @@ ggplot(Cars2020, aes(x = Drive, fill = Drive)) +
 
 Como apunte adicional, `{ggplot2}` ofrece **múltiples [temas](https://ggplot2.tidyverse.org/reference/ggtheme.html)** (pág. 77) que pueden ser utilizados en los títulos como argumento de `ggtitle()` o de toda la gráfica si se utilizan como una **capa adicional**. El paquete `{ggthemes}` ofrece **temas adicionales** (algunos de los cuales replican el estilo de *The Economist* o *Stata*). **Ejemplos** de código y visualizaciones de este paquete pueden encontrarse [aquí](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/). Otros paquetes de temas son `{hrbrthemes}` y `{bbplot}`.
 
-# [6. Ejercicios (pág. 80)](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5556e93b-4a16-4df6-aff9-af1f008ca585)
 
+# 6. Ejercicios (pág. 80)
+En el archivo [actividades/ejercicios_tema6_visualización_de_datos.R](actividades/ejercicios_tema6_visualización_de_datos.R) se incluye la resolución de los 6 ejercicios propuestos en este tema. En el [video 11](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5556e93b-4a16-4df6-aff9-af1f008ca585) se solucionan los ejercicios 1 y 2.

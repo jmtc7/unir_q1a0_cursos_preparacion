@@ -1,4 +1,5 @@
 # Introducción
+
 ## 1. Introducción
 R es un lenguaje interpretado orientado al análisis y visualización de datos. R está disponible para todos los sistemas operativos en su [web oficial](https://www.r-project.org/), al igual que [RStudio](https://posit.co/download/rstudio-desktop/) (*Positron* es el sucesor de RStudio y también soporta Python). La última versión estable de R hasta la fecha es la 4.4.1, publicada en junio de 2024. Algunas de las ventajas de utilizar R son:
 - Diseñado desde un principio para manipular datos de forma rápida y precisa.
@@ -9,6 +10,7 @@ R es un lenguaje interpretado orientado al análisis y visualización de datos. 
 - Es flexible y extensible gracias a los paquetes creados por la comunidad.
 - Su IDE, RStudio, permite tener código, resultados y visualizaciones en el mismo lugar. También ofrece  [RStudio Cloud](https://posit.cloud/).
 - R es gratuito y ámpliamente utilizado en el ámbito académico, pero también en Google, Facebook, Airbnb, Uber, etc.
+
 
 ## 2.Instalación
 La manera de **instalar R** depende del sistema operativo, siempre se usa **CRAN** (*Comprehensive R Archive Network*), que es el respositorio central de R y está compuesto por servidores repartidos por el mundo (también conocidos como *sitios espejo*). Puedes ir al [servidor en la nube de R](https://cloud.r-project.org/), que elegirá el servidor más cercano a ti automáticamente para descargarlo. Para instalarlo en Ubuntu, deberás ejecutar lo siguiente:
@@ -29,6 +31,7 @@ sudo apt install --no-install-recommends r-base
 ```
 
 Tras instalar R, se puede proceder a **instalar RStudio**. Para hacerlo, accede a la [web oficial](https://posit.co/download/rstudio-desktop/) y descarga y ejecuta el instalador que corresponda a tu sistema operativo. Por ejemplo, para Ubuntu 22 sería `sudo dpkg -i rstudio-2025.09.1-401-amd64.deb`.
+
 
 ## 3. Utilización Básica
 En R, los comentarios empiezan con `#`. Se suelen dejar al menos dos espacios entre las líneas de código y el inicio del comentario. Por claridad, los resultados obtenidos por consola se mostrarán precedidos de `##`. Por ejemplo:
