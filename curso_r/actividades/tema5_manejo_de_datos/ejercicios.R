@@ -5,16 +5,16 @@
 # Cargar datos desde ficheros TXT en local y en remoto
 print("EJEMPLOS: Importar de Datos")
 library(readxl)  # Librería para leer hojas de Excel
-datos_txt_locales<-read.table("datos/t5/medidas_cuerpo.txt",  # Ruta al archivo
+datos_txt_locales<-read.table("datos/medidas_cuerpo.txt",  # Ruta al archivo
                               header = TRUE,  # Fila con nombres de variables
                               dec = ".", # Separador entre enteros y decimales
                               stringsAsFactors = TRUE,  # Strings en factores
                               comment.char = "#")  # Comienzo de comentarios
 datos_txt_web<-read.table("https://www.biostatisticien.eu/springeR/imcenfant.txt",
                           header = TRUE, stringsAsFactors = TRUE)
-datos_csv<-read.csv("datos/t5/gapminder_es.csv")
-datos_excel<-read_excel("datos/t5/NutritionStudy.xlsx")
-datos_esp<-"datos/t5/2024-datos-anuales-panel-consumo-hogares-base2021_v2.xlsx"
+datos_csv<-read.csv("datos/gapminder_es.csv")
+datos_excel<-read_excel("datos/NutritionStudy.xlsx")
+datos_esp<-"datos/2024-datos-anuales-panel-consumo-hogares-base2021_v2.xlsx"
 datos_excel_hoja<-read_excel(datos_esp, sheet="PRECIO", skip=2 )  # Skip 2 rows
 
 # Mostrar datos importados
@@ -63,7 +63,7 @@ print(datos)  # [OK]
 cat("\nEJERCICIO 4\n")
 
 # Cargar datos y obtener media y desviación estándar de los pesos
-langostas <- read.table("datos/t5/lobsters (2).txt", sep=" ", header=TRUE)
+langostas <- read.table("datos/lobsters (2).txt", sep=" ", header=TRUE)
 peso_medio = mean(langostas$Peso, na.rm = TRUE)  # Media ignorando NAs
 peso_std = sd(langostas$Peso, na.rm = TRUE)      # Desv. estándar ignorando NAs
 # Alternativa: langostas %>% summarise(media=mean(Peso), std=sd(Peso))
