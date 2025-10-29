@@ -26,8 +26,12 @@ Este curso está dividido en las siguientes secciones:
    1. Gráficos Básicos con plot() y Superposición de Elementos
    2. Otros Gráficos con hist(), boxplot() y barplot()
    3. Gŕaficos con {GGPlot2}
-7. **Introducción a R Markdown**
-8. **R y Bases de Datos**
+7. [**Introducción al R Markdown**](7_r_markdown.md)
+   1. Bases del R Markdown
+   2. Formatos de Salida
+   3. Bloques de Código y Código en Línea
+   4. Expresiones Matemáticas con LaTeX
+8. [**R y Bases de Datos**](8_bases_de_datos.md)
 
 Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. Algunos títulos en dichos ficheros tienen links asociados a los vídeos donde se profundiza en los detalles de las secciones correspondientes
 
