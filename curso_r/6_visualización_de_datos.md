@@ -1,6 +1,6 @@
 # Visualización de Datos
 
-# 1. Introducción
+## 1. Introducción
 R cuenta con funciones para generar gráficos de nubes de puntos, líneas, barras, circulares, etc. También se pueden crear histogramas y curvas de densidad. Estos gráficos son útiles para explorar los datos y encontrar patrones. Todos pueden ser almacenados para reutilizarlos posteriormente.
 
 Los objetivos de este tema son:
@@ -8,7 +8,7 @@ Los objetivos de este tema son:
 - Entender la **gramática básica de los gráficos**, incluyendo estética, capas geométricas, estadísticas, escalas, colores, etc.
 
 
-# 2. Gráficos Básicos con plot() (pág. 4)
+## 2. Gráficos Básicos con plot() (pág. 4)
 La función `plot()` permite generar varios tipos de gráfico. Utilizando **dos vectores** con las coordenadas en X y en Y de una serie de puntos se puede obtener un **diagrama de dispersión**. También puede utilizarse para representar una **función**. Algunos de los **argumentos** más útiles de `plot()` son:
 - `type`: Elige el tipo de gráfico a mostrar (`p` para puntos, `l` para líneas, `h` para histograma, `b` para líneas con puntos (*both*), `s` para barras (*steps*), etc.)
 - **Personalizar los puntos**: `pch` permite elegir el **tipo** de puntos utilizado (hay 25 opciones), `cex` cambia su **tamaño** y con `col` escogemos el **color**. También podemos cambiar el **grosor de los bordes** con `lwd` (excepto en los tipos del 15 al 18). Los tipos de puntos del 21 al 25 permiten un **color de borde** diferente al del relleno, configurable con `bg`.
@@ -58,7 +58,7 @@ plot(x, y, type = "l",
 ```
 
 
-# 3. Añadir Elementos a un Gráfico Existente (pág. 25)
+## 3. Añadir Elementos a un Gráfico Existente (pág. 25)
 Con `plot()` podemos crear un gráfico pero, en ocasiones, queremos añadir elementos adicionales a los gráficos existentes. Para ello, se utilizan las siguientes funciones (todas usan los **mismos parámetros de personalización que** `plot()`):
 - `lines()` genera las líneas que unen a los puntos que recibe como argumentos, al igual que `plot(x, y, type = "l")`.
 - `abline()` añade una recta a un gráfico. Si se le dan dos parámetros (`a` y `b`) generará la **recta** `y = a*x + b`. Si se le da sólo el parámetro `v` generará una recta **vertical** y si solo se le da el `h`, una **horizontal**.
@@ -101,7 +101,7 @@ curve(dnorm(x), col = 'darkgreen', lty = "dashed", add = TRUE)
 ```
 
 
-# 4. Otros Gráficos (pág. 35)
+## 4. Otros Gráficos (pág. 35)
 Los **histogramas** son muy útiles para visualizar las distribuciones de las variables continuas. En R se generan utilizando la función `hist()`. Algunos detalles a considerar son:
 - Con `breaks` podemos elegir la **cantidad de barras** o *bins* a utilizar. Si no se especifica, R la elegirá automáticamente. También admite **otros valores** como los puntos de corte entre cada barra, una función para generar los puntos de corte, el nombre de uno de los algoritmos aceptados para calcular los intervalos (`Sturges`, `Scott` o `Freedman-Diaconis`), etc.
 - **Por defecto**, muestra la **frecuencia** (es decir, cuántos elementos hay entre cada rango de valores), pero se puede utilizar `freq = FALSE` o `prob = True` para que el área de cada rectángulo represente la **probabilidad** de que un elemento perteneza a ese rango de valores (el área de todo el histograma será 1).
@@ -189,7 +189,7 @@ barplot(tabla2C_prop,
 En la web [From Data to Viz](https://www.data-to-viz.com/) se pueden explorar más tipos de gráficos junto a un árbol de decisión para escoger cuál es el más apropiado. Además, en la [Galería Gráfica de R](https://r-graph-gallery.com/) podrás encontrar todos los gráficos que se pueden hacer con R junto con ejemplos y visualizaciones.
 
 
-# 5. Gráficos de GGPlot2  (pág. 47)
+## 5. Gráficos de GGPlot2  (pág. 47)
 El paquete `{ggplot2}` ofrece alternativas a las funciones del R básico para crear gráficos complejos y estéticos más fácilmente. Usa la **gramática de gráficos** y espera recibir tablas de **datos en formato *tidy*** (una variable por columna y una observación por fila). Para usar este paquete es muy útil tener a mano la [guía rápida de GGPLOT2](https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/spanish/data-visualization_es.pdf). Para trabajar con `{ggplot2}` es importante diferenciar entre los **3 elementos principales**:
 - **Datos**: El conjunto de datos a representar.
 - **Geometría**: Elementos visuales. Posibles geometrías son diagrama de barras, histograma, densidades suaves (*smooth densities* en inglés), gráfico Q-Q y diagrama de cajas.
@@ -337,5 +337,5 @@ ggplot(Cars2020, aes(x = Drive, fill = Drive)) +
 Como apunte adicional, `{ggplot2}` ofrece **múltiples [temas](https://ggplot2.tidyverse.org/reference/ggtheme.html)** (pág. 77) que pueden ser utilizados en los títulos como argumento de `ggtitle()` o de toda la gráfica si se utilizan como una **capa adicional**. El paquete `{ggthemes}` ofrece **temas adicionales** (algunos de los cuales replican el estilo de *The Economist* o *Stata*). **Ejemplos** de código y visualizaciones de este paquete pueden encontrarse [aquí](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/). Otros paquetes de temas son `{hrbrthemes}` y `{bbplot}`.
 
 
-# 6. Ejercicios (pág. 80)
+## 6. Ejercicios (pág. 80)
 En el archivo [actividades/ejercicios_tema6_visualización_de_datos.R](actividades/ejercicios_tema6_visualización_de_datos.R) se incluye la resolución de los 6 ejercicios propuestos en este tema. En el [video 11](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5556e93b-4a16-4df6-aff9-af1f008ca585) se solucionan los ejercicios 1 y 2.
