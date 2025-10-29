@@ -28,14 +28,17 @@ Los formatos de salida son como funciones, se le pueden pasar argumentos. Por ej
 ---
 title: "Mi primer R Markdown"
 author: "Nombre del Autor"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 output:
     html_document:
-        toc: true       # incluir una Table Of Content (toc)
-        toc_float: true
-        toc_depth: 2    # hasta 2 niveles en el toc (esto es # y ##)
+        toc: true        # Incluir un índice (Table of Contents)
+        toc_float: true  # Hacer que el índice sea flotante e interactivo
+        toc_depth: 2     # Aceptar 2 niveles de profundidad en el índice (esto es # y ##)
+        theme: cerulean  # Aplicar el tema "cerulean" para mejorar la estéetica
 ---
 ```
+
+Respecto a los **temas**, puedes ver qué temas están disponibles en [Bootswatch](https://bootswatch.com/) y escoger el que más se adapte a lo que busques.
 
 Una particularidad al trabajar **exportando PDFs** es que estos se generan pasando por un **archivo LaTeX intermedio**. Por defecto, este se elemina, pero el argumento `keep_tex` **permite guardarlo**.
 
@@ -43,7 +46,7 @@ Cabe destacar que al pulsar el botón `Knit` se compilará el **primer tipo de d
 
 
 ## 4. Bloques de Código y Código en Línea (pág. 15)
-Como ya se ha mencionado, para indicar **bloques de código** se usa ```` ```{r} ```` y ```` ``` ````. Sin embargo, si queremos mostrar únicamente los resultados de algunas operaciones, se puede utilizar **código en línea** o *inline code*. Para hacer esto, ocultamos el bloque de código con `include = FALSE` de la siguiente manera:
+Como ya se ha mencionado, para indicar **bloques de código** se usa ``` `r ``` y ``` ` ```. Sin embargo, si queremos mostrar únicamente los resultados de algunas operaciones, se puede utilizar **código en línea** o *inline code*. Para hacer esto, ocultamos el bloque de código con `include = FALSE` de la siguiente manera:
 ````r
 ```{r codigo_en_linea, include = FALSE}
 res <- mtcars %>% summarize(media = mean(mpg), desvio = sd(mpg), n = length(mpg))

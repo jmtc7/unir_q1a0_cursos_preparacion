@@ -1,0 +1,45 @@
+---
+title: "ANOVA"
+author: "Tu nombre"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+<style>
+  body{text-align: justify}
+</style>
+
+# Análisis de la varianza
+
+El análisis de varianza o ANOVA por sus siglas en inglés (**AN**alysis **O**f **VA**riance), 
+es un modelo estadístico que evalúa si las medias de distintos grupos son iguales. 
+Su versión más simple es aquella en la cual dos grupos distintos son comparados considerando solo los efectos fijos de los mismos. 
+Este caso particular es llamado comúnmente Test de t (*t*-test).
+
+## El modelo ANOVA
+
+El modelo estadístico clásico del análisis de varianza con un solo factor para los datos es:
+
+$$ Y_{ij} = \mu_i + \varepsilon_{ij}, \quad i=1, \ldots, I, \; j=1, \ldots, n_i $$
+
+donde $Y_{ij}$ es la $j$-ésima observación del grupo $i$ (nota que cada grupo es un nivel de un factor o **tratamiento**), 
+$\mu_i$ es la media del grupo $i$ y $\varepsilon_{ij}$ es el error aleatorio correspondiente a esta observación. 
+$n_i$ es la cantidad de observaciones en el grupo $i$ e $I$ es la cantidad de grupos o niveles del factor (*cantidad de tratamientos*).
+
+Otra forma de plantear el modelo es la siguiente. 
+Si se considera $\mu$ como el valor esperado para una observación cualquiera de la población (la media global sin tener en cuenta los diferentes niveles del factor), 
+y $\alpha_i$ el efecto introducido por el nivel $i$ del factor, entonces la media de un determinado nivel ($\mu_i$) se puede definir como:
+
+$$ \mu_i = \mu + \alpha_i $$
+
+y por tanto el modelo en los datos resulta
+
+$$ Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}, \quad i=1, \ldots, I, \; j=1, \ldots, n_i $$
+
+donde $\mu$ es la media global, $\alpha_i$ es el efecto del $i$-ésimo tratamiento, sujeto a la restricción $\sum_{i=1}^I \alpha_i = 0$, 
+y $\varepsilon_{ij}$ es el error aleatorio correspondiente a esta observación que suponemos con distribución 
+$\mathcal{N}(0, \sigma^2)$ e independientes.
