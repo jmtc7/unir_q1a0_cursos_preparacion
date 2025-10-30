@@ -12,19 +12,19 @@ Estos cursos tienen el siguiente contenido:
   - Introducción
   - Primeros Conceptos
   - Programación Básica
-  - Funciones
-  - Organización del Código
-  - Aspectos Avanzados
-  - Análisis de Datos
-  - Visualización de Datos
+  - Funciones Lambda y *Logging*
+  - Organización con Módulos, Clases y Objetos
+  - RegEx y Gestión de Errores
+  - Análisis de Datos con NumPy y Pandas
+  - Visualización de Datos con Matplotlib y Seaborn
 - **Curso de Iniciación a R Orientado a Datos**
   - Introducción
   - Conceptos Básicos
   - Estructuras de Datos
   - Programación Básica
   - Manejo de Datos
-  - Visualización de Datos
+  - Visualización de Datos con R base y GGPlot2
   - Introducción a R Markdown
-  - R y Bases de Datos
+  - R y Bases de Datos (MySQL, SQLite y MongoDB)
 
 Cada curso estará contenido en una carpeta dedicada en la raíz de este repositorio. Las notas estarán hechas en Markdown.
