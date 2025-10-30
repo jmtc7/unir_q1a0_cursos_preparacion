@@ -1,0 +1,184 @@
+---
+title: "Shiny - Ejemplos Parte 2"
+author: ""
+date: "14/04/2024"
+output: html_document
+runtime: shiny
+---
+
+```{r}
+library(shiny)
+```
+
+# 2.- Control de la reactividad
+
+## Crear una expresión reactiva
+`reactive` envuelve una expresión normal para crear una expresión reactiva.
+Conceptualmente, es una expresión cuyo resultado cambiará con el tiempo.
+
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+  label = "Selecciona un numero",
+  value = 25, min = 1, max = 100),
+  plotOutput("hist"),
+  verbatimTextOutput("stats"),
+  verbatimTextOutput("len")
+)
+
+server <- function(input, output) {
+  data <- reactive({
+    # numero <- (input$num *10 )/27
+    # rnorm(numero)
+    rnorm(input$num *10)
+    #rnorm(input$num)
+    # Aquí pueden haber muchas más operaciones...
+  })
+  
+  output$hist <- renderPlot({hist(data())})
+  
+  output$stats <- renderPrint({summary(data())})
+  
+  output$len <- renderPrint({
+    #length(data())
+    data()
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Crear un entorno que no sea reactivo
+`isolate` causa que no se dispare la reacción reactiva dentro de un entorno
+reactivo pero permite acceder a los valores.
+
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+  label = "Selecciona un numero",
+  value = 25, min = 1, max = 100),
+  textInput(inputId = "title",
+  label = "Escribe un titulo",
+  value = "Histograma de valores aleatorios Normales"),
+  plotOutput("hist"),
+  verbatimTextOutput("stats")
+)
+
+server <- function(input, output) {
+  output$hist <- renderPlot({hist(rnorm(isolate(input$num)),
+                                  main = input$title)})
+  output$stats <- renderPrint({as.character(input$num)})
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Botón de acción
+`actionButton` crea un botón o enlace cuyo valor inicial es cero, pero que
+se incrementa cada vez que se pulsa.
+
+```{r}
+library(shiny)
+ui <- fluidPage(
+  actionButton(inputId = "clicks", label = "Dame caña!"),
+  verbatimTextOutput("nclick")
+)
+
+server <- function(input, output) {
+  observeEvent(input$clicks, {print(as.numeric(input$clicks))})
+  # output$nclick <- renderPrint({
+  # as.character(input$clicks)
+  # })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Observar eventos reactivos
+`observeEvent` responde a evento reactivos de entradas, valores,
+expresiones.
+
+```{r}
+library(shiny)
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+  label = "Selecciona un numero",
+  min = 1, max = 100, value = 25),
+  actionButton(inputId = "boton1",
+  label = "ACTUALIZAR")
+)
+
+server <- function(input, output) {
+  # observe responds to the print button
+  # but not the slider
+  observeEvent(input$boton1, {print(as.numeric(input$num))})
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Reaccionar a eventos reactivos
+`eventReactive` responde (y permite devolver/calcular valores) a evento
+reactivos de entradas, valores, expresiones.
+
+```{r}
+library(shiny)
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+  label = "Selecciona un numero",
+  value = 25, min = 1, max = 100),
+  actionButton(inputId = "go", label = "Update"),
+  plotOutput("hist")
+)
+
+server <- function(input, output) {
+  data <- eventReactive(input$go, {rnorm(input$num)})
+  output$hist <- renderPlot({hist(data())})
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Valores reactivos
+Esta función devuelve un objeto para almacenar valores reactivos. Es similar
+a una lista, pero con capacidades especiales para programación reactiva.
+Cuando se lee un valor de él, la expresión reactiva que llama toma una
+dependencia reactiva de ese valor, y cuando se escribe en él, notifica
+cualquier función reactiva que dependa de ese valor. Los valores tomados del
+objeto reactiveValues son reactivos, pero el objeto reactiveValues en sí no
+lo es.
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  actionButton(inputId = "norm", label = "Normal"),
+  actionButton(inputId = "unif", label = "Uniform"),
+  sliderInput(inputId = "num",
+  label = "Selecciona un numero",
+  value = 25,
+  min = 1,
+  max = 100),
+  plotOutput("hist"),
+  verbatimTextOutput("texto")
+)
+
+server <- function(input, output) {
+  numero <- reactive({input$num})
+  rv <- reactiveValues(data = rnorm(100),
+  titulo="Distribicion normal",
+  total=19885)
+  observeEvent(input$norm, {rv$data <- rnorm(numero())
+                            rv$titulo <- "Ahora es normal"})
+  observeEvent(input$unif, {rv$data <- runif(numero())
+                            rv$titulo <- "Ahora es uniforme"})
+  output$hist <- renderPlot({hist(rv$data, main=rv$titulo)})
+  output$texto <- renderPrint({cat("Cantidad de muestras generadas: ",
+                                   length(rv$data))})
+}
+
+shinyApp(ui = ui, server = server)
+```

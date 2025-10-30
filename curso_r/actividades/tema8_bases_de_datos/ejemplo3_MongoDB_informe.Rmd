@@ -1,0 +1,45 @@
+---
+title: 'Tema 8: Informe de datos con MongoDB y R Markdown'
+author: "jmtc7"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+# Informe de Análisis de Datos - Conexión con MongoDB
+
+## Introducción
+
+Este informe tiene como objetivo analizar un conjunto de datos almacenado
+en una base de datos MongoDB, utilizando R para recuperar, analizar y
+visualizar la información. La base de datos contiene información sobre varias
+personas, incluyendo su edad, profesión y otras características relevantes.
+A través de este análisis, se busca identificar patrones y tendencias que
+puedan ser útiles para la toma de decisiones.
+
+## Conexión y Extracción de Datos
+Utilizamos el paquete `{mongolite}` para conectarnos a MongoDB y extraer los
+datos necesarios para el análisis. A continuación, se muestra el código
+utilizado para la conexión y la extracción de los datos:
+
+```{r}
+# Instalación y carga del paquete mongolite
+library(mongolite)
+library(ggplot2)
+
+# Conexión a la base de datos MongoDB
+con <- mongo(collection = "mi_coleccion",
+             db = "mi_base_de_datos",
+             url = "mongodb://localhost:27017")
+
+# Recuperación de todos los documentos de la colección
+datos <- con$find()
+
+# Análisis descriptivo
+summary(datos$edad)
+table(datos$profesion)
+con$disconnect()
+```

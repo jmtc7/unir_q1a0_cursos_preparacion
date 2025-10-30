@@ -1,4 +1,4 @@
-# Curso de Iniciación a R Orientado a Datos
+# Curso de Iniciación a R
 Este curso está dividido en las siguientes secciones:
 1. [**Introducción**](1_introducción.md)
    1. Instalación
@@ -32,10 +32,10 @@ Este curso está dividido en las siguientes secciones:
    3. Bloques de Código y Código en Línea
    4. Expresiones Matemáticas con LaTeX
 8. [**R y Bases de Datos**](8_bases_de_datos.md)
+   1. Conexión con MySQL, SQLite y MongoDB
+   2. Manipulación y Análisis de Datos
+   3. Visualización de Datos y Reporting
 
 Cada sección tiene un fichero Markdown `*.md` asociado que contiene las notas relativas a ella. Algunos títulos en dichos ficheros tienen links asociados a los vídeos donde se profundiza en los detalles de las secciones correspondientes
 
-También existen la **carpeta** `actividades/`, que contiene los **ejercicios prácticos** realizados para este curso. Dentro de ella encontramos otra subcarpeta, `datos/`, que contiene varios archivos con **datos** en formato CSV y TXT para los ejercicios del curso.
-
-## Actividades
-TODO
+También existen la **carpeta** `actividades/`, que contiene los **ejercicios prácticos** realizados para este curso. Dentro de ella encontramos múltiples archivos con los ejercicios de cada tema. Algunos temas tienen una subcarpeta dedicada, ya que requieren de múltiples archivos.

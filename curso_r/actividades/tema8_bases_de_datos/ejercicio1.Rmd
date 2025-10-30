@@ -1,0 +1,99 @@
+---
+title: "Shiny - Ejemplos Parte 1"
+author: ""
+date: "14/04/2024"
+output: html_document
+runtime: shiny
+---
+
+```{r}
+library(shiny)
+```
+
+# 1. Creación de la aplicación
+
+## Crea una app en RStudio
+El proceso es el siguiente:
+
+>- ```File``` > ```New File``` > ```Shiny Web App``` >
+>- Rellena los campos: ```Aplication name``` y ```directory```
+
+* Esta acción crearé una carpeta en el directorio de trabajo siguiendo el
+nombre indicado previamente.
+* Dentro de la carpeta estará el fichero app.R que contiene un código inical
+de ejemplo, con la estructura que necesita la aplicación.
+* Rstudio detecta que es una aplicación shiny y activa el boton "Run app"
+en la ventana de scripts (en el marco, zona superior derecha)
+* El ejemplo es plenamente funcional, probarlo dandole a "Run app". Probarlo
+tambien en navegador.
+
+## Aplicación base
+```{r, echo=FALSE}
+library(shiny)
+ui <- fluidPage()
+server <- function(input, output) {}
+shinyApp(server = server, ui = ui)
+```
+
+## Una entrada y cero salidas
+```{r, echo=FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+  label = "Selecciona un numero",
+  value = 25, min = 10, max = 100)
+)
+
+server <- function(input, output) {}
+shinyApp(server = server, ui = ui)
+```
+
+## Dos entradas y una salida
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput(inputId = "num1",
+  label = "Selecciona un numero",
+  value = 25, min = 1, max = 100),
+  # sliderInput(inputId = "num2",
+  # label = "Selecciona un numero",
+  # value = 25, min = 1, max = 100),
+  textInput(inputId = "title",
+  label = "Escribe un titulo",
+  value = "Histograma de valores aleatorios Normales"),
+  plotOutput("histo")
+)
+
+server <- function(input, output) {
+  set.seed(1234)
+  output$histo <- renderPlot({hist(rnorm(input$num1), main = input$title)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Dos entradas y dos salida
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+              label = "Selecciona un numero",
+  value = 25, min = 1, max = 100),
+  plotOutput("hist"),
+  verbatimTextOutput("stats")
+)
+
+server <- function(input, output) {
+  output$hist <- renderPlot({hist(rnorm(input$num))})
+    
+  output$stats <- renderPrint({
+  summary(rnorm(input$num))
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
