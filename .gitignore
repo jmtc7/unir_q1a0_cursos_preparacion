@@ -3,3 +3,4 @@ curso_r/material/
 
 *.Rhistory
 *.RData
+.Rproj.user

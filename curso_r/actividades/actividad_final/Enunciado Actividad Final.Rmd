@@ -1,0 +1,381 @@
+---
+title: "Actividad R - UNIR"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+# Análisis Exploratorio de Datos (EDA), Visualización, PCA y Regresión Lineal en R. 
+
+## Introducción
+En esta actividad vamos a embarcarnos en un viaje a través del análisis de datos utilizando R, una herramienta poderosa para estadísticas y visualización. 
+Nuestra meta es comprender cómo podemos explorar, analizar y modelar datos de manera efectiva. Este proceso es crucial para cualquier proyecto de ciencia de datos, ya que nos permite tomar decisiones basadas en la evidencia.
+
+## Objetivos
+* Realizar un Análisis Exploratorio de Datos (EDA) para comprender nuestras variables.
+* Aprender técnicas básicas y avanzadas de visualización de datos.
+* Aplicar el Análisis de Componentes Principales (PCA) para reducir la dimensionalidad.
+* Implementar una regresión lineal para predecir variables de interés.
+
+### 1. Análisis Exploratorio de Datos (EDA)
+El EDA es nuestro primer paso en el análisis de datos. Nos permite:
+- Identificar patrones.
+- Detectar anomalías.
+- Formular hipótesis.
+- Chequear supuestos.
+
+Usaremos funciones como `str()`, `summary()`, y `sum(is.na())` para obtener una visión inicial de nuestro conjunto de datos.
+
+### 2. Limpieza de Datos
+La calidad de nuestros datos es primordial. Durante esta fase:
+
+- Manejamos valores faltantes.
+- Corregimos errores.
+- Transformamos variables si es necesario, usando, por ejemplo, `na.omit()` para eliminar filas con valores `NA`.
+
+### 3. Visualización de Datos
+"Una imagen vale más que mil palabras". Utilizaremos `ggplot2` y `GGally` para:
+
+Crear histogramas, diagramas de dispersión, y más.
+Explorar relaciones entre variables.
+Identificar patrones y outliers visualmente.
+
+## Conclusión
+Con esta actividad habrás cubierto los fundamentos básicos del análisis de datos utilizando R. Estas herramientas y técnicas son esenciales para cualquier científico de datos, proporcionando la base para análisis más complejos y toma de decisiones informadas.
+
+¡Ahora es tu turno de explorar y descubrir los insights en tus propios conjuntos de datos! 
+
+<hr>
+<hr>
+
+## Manos a la obra
+
+Para ejercicios de limpieza de datos, vamos a trabajar con un dataset llamado `bike` que contiene varias columnas, algunas numéricas y otras categóricas. Los ejercicios propuestos abordarán transformaciones comunes, manejo de datos faltantes, creación de nuevas variables, visualización de la distribución de los datos, y conversión de variables categóricas a numéricas.
+
+*Ejecuta las siguintes celdas desde RStudio o utilizando R directamente. En este último caso, copia y pega las instrucciones en la terminal.*
+
+### Preparación Inicial
+
+Asumiremos que el dataset `bikes` ya ha sido cargado en R. Si no has cargado un dataset, puedes hacerlo con el siguiente código, adaptándolo al nombre y ruta de tu archivo:
+
+Asegúrate de tener instaladas y cargadas las librerías necesarias:
+
+```{r}
+library(forcats)   # Para trabajar con factores (variables categóricas)
+library(tidyverse) # Para manipulación de datos y ggplot2
+library(ggplot2) # Visualización de datos
+library(GGally) # Para visualizaciones más complejas
+
+```
+
+```{r}
+bikes <- read.csv("data/bike_buyers.csv", sep=",", header=1)
+head(bikes)
+```
+
+### Ejercicio 1: Inspección y Limpieza Inicial
+
+1. **Inspección básica**: Realiza un resumen estadístico y estructural del dataset con `summary(bikes)` y `str(bikes)`.
+```{r}
+# Inspección básica
+summary(bikes)
+str(bikes)
+```
+
+2. **Valores faltantes**: Identifica y cuenta los valores faltantes por columna.
+```{r}
+# Valores faltantes
+missing_values <- sum(is.na(bikes))
+```
+
+3. **Eliminación de filas con valores faltantes**: Elimina las filas que contengan valores faltantes en cualquier columna.
+```{r}
+# Eliminación de filas con valores faltantes
+# Eliminar datos es una tarea que requiete atención, puede que al borrar pierdas mucha información.
+bikes_cn <- na.omit(bikes)
+head(bikes_cn)
+```
+
+### Ejercicio 2: Datos Faltantes Avanzados
+
+1. **Imputación de valores faltantes**: Para una columna numérica con valores faltantes, imputa los valores faltantes con la media o mediana de la columna.
+```{r}
+# Imputación de valores faltantes
+bikes$Age[is.na(bikes$Age)] <- mean(bikes$Age, na.rm = TRUE)
+```
+
+2. **Creación de una variable indicadora de datos faltantes**: Crea una nueva variable binaria que indique con `1` si falta un valor en una columna específica y `0` si no.
+```{r}
+# Creación de una variable indicadora de datos faltantes
+bikes$Age_missing <- ifelse(is.na(bikes$Age), 1, 0)
+```
+
+### Ejercicio 3: Transformación y Creación de Variables
+
+1. **Normalización de variables numéricas**: Selecciona una columna numérica y aplícale una normalización min-max.
+
+```{r}
+# Normalización de variables numéricas (ejemplo con 'age')
+bikes$Age_normalized <- (bikes$Age - min(bikes$Age)) / (max(bikes$Age) - min(bikes$Age))
+```
+
+2. **Creación de una variable categórica**: A partir de una variable numérica, crea una nueva variable categórica (por ejemplo, grupos de edad basados en una columna de edad).
+
+```{r}
+# Creación de una variable categórica a partir de numérica
+bikes$Age_categorical <- cut(bikes$Age, breaks=c(0, 18, 35, 65, 100), labels=c("Young", "Young adult", "Adult", "Senior"))
+```
+
+
+### Ejercicio 4: Manejo de Variables Categóricas
+
+1. **Conversión de variables categóricas a numéricas**: Convierte una variable categórica en numérica usando `factor()` y luego `as.numeric()`.
+
+```{r}
+# Conversión de categóricas a numéricas
+bikes$Occupation_Numeric <- as.numeric(factor(bikes$Occupation))
+```
+
+2. **Agrupación de categorías poco frecuentes**: Agrupa en una nueva categoría llamada "Otros" aquellas categorías que aparezcan menos de un umbral específico.
+```{r}
+# Agrupación de categorías poco frecuentes
+bikes$Education_categorical <- fct_lump_n(bikes$Education, n = 5)
+
+```
+
+### Ejercicio 5: Visualización de Datos
+
+1. **Histograma de una variable numérica**: Crea un histograma para una variable numérica.
+```{r}
+# Histograma de una variable numérica
+ggplot(bikes, aes(x = Age)) + geom_histogram(binwidth = 1, fill = "blue", color = "black")
+```
+
+```{r}
+ggplot(bikes, aes(x = Occupation_Numeric)) + geom_histogram(fill = "green", color = "black")
+```
+
+2. **Diagrama de barras para una variable categórica**: Crea un diagrama de barras para mostrar la frecuencia de las categorías de una variable categórica.
+```{r}
+# Diagrama de barras para una variable categórica
+ggplot(bikes, aes(x = Education)) + geom_bar(fill = "coral", color = "black")
+```
+
+```{r}
+# Diagrama de barras para una variable categórica
+ggplot(bikes, aes(x = Age_categorical)) + geom_bar(fill = "red", color = "black")
+```
+
+```{r}
+ggplot(bikes, aes(x = Occupation_Numeric)) + geom_bar(fill = "green", color = "black")
+```
+
+##### Otros ejercicios de visualización
+
+1. **Graficar la distribución de los ingresos de los compradores de bicicletas**.
+
+```{r}
+ggplot(data = bikes, aes(x = Income)) + 
+  geom_histogram(binwidth = 5000, fill = "dodgerblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribución de Ingresos", x = "Ingresos", y = "Frecuencia")
+
+```
+
+2. **Crear un diagrama de caja para comparar la distribución de edades entre géneros.**
+
+```{r}
+ggplot(data = bikes, aes(x = Gender, y = Age, fill = Gender)) + 
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Distribución de Edad por Género", x = "Género", y = "Edad")
+
+```
+3. **Mostrar el número medio de autos que poseen los individuos agrupados por su estado civil.**
+
+```{r}
+# library(dplyr)
+bikes %>% 
+  group_by(Marital.Status) %>% 
+  summarise(Average.Cars = mean(Cars, na.rm = TRUE)) %>% 
+  ggplot(aes(x = Marital.Status, y = Average.Cars, fill = Marital.Status)) + 
+    geom_col() +
+    theme_minimal() +
+    labs(title = "Promedio de Autos por Estado Civil", x = "Estado Civil", y = "Promedio de Autos")
+
+```
+4. **Visualizar la frecuencia de los niveles educativos entre los compradores de bicicletas.**
+
+```{r}
+# library(dplyr)
+ggplot(data = bikes, aes(x = Education)) + 
+  geom_bar(fill = "salmon", color = "black") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Nivel Educativo de los Compradores", x = "Nivel Educativo", y = "Frecuencia")
+
+```
+
+5. **Explorar la relación entre la edad y los ingresos de los compradores de bicicletas con un gráfico de dispersión.**
+
+```{r}
+# library(dplyr)
+ggplot(data = bikes, aes(x = Age, y = Income, color = Gender)) + 
+  geom_point(alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Relación entre Edad e Ingresos", x = "Edad", y = "Ingresos")
+
+```
+
+
+
+### Comprensión de los datos: realiza cálculos y obtén información útil.
+
+1. **Calcular el ingreso promedio de los compradores de bicicletas.**
+
+```{r}
+# Calcula el ingreso promedio
+ingreso_promedio <- mean(bikes$Income, na.rm = TRUE)
+print(paste("El ingreso promedio es:", ingreso_promedio))
+
+```
+
+2. **Calcular el ingreso medio por cada nivel educativo.**
+
+```{r}
+# library(dplyr)
+
+# Agrupa por nivel educativo y calcula el ingreso medio
+ingreso_medio_educacion <- bikes %>%
+  group_by(Education) %>%
+  summarise(Ingreso_Medio = mean(Income, na.rm = TRUE))
+
+print(ingreso_medio_educacion)
+
+```
+
+3. **Encontrar la correlación entre el número de autos y el número de hijos** que tienen los compradores de bicicletas.
+
+```{r}
+# Calcula la correlación entre Cars y Children
+correlacion_cars_children <- cor(bikes$Cars, bikes$Children, use = "complete.obs")
+print(paste("La correlación entre el número de autos y el número de hijos es:", correlacion_cars_children))
+```
+<hr>
+
+## Retos Propuestos
+
+Después del análisis anterior, realiza los siguientes retos.
+<hr>
+En cada reto, debes editar el formato de la celda para que permita la ejecución de código R. Esta edición implica cambiar las cabeceras de las celdas por \```\{r\}.
+<hr>
+
+**Reto 1**. Completar el código para calcular y comparar la edad media entre los compradores de bicicletas y los que no compraron.
+
+```r
+# library(dplyr)
+
+# Código a completar
+edad_media_compradores <- bikes %>%
+  filter(Purchased_Bike == "Yes") %>%
+  summarise(Edad_Media = mean(___, na.rm = TRUE))
+
+edad_media_no_compradores <- bikes %>%
+  filter(Purchased_Bike == "No") %>%
+  summarise(Edad_Media = mean(___, na.rm = TRUE))
+
+print(edad_media_compradores)
+print(edad_media_no_compradores)
+
+```
+
+**Reto 2**. Calcular el número promedio de hijos que tienen los compradores de bicicletas, agrupado por región.
+
+```r
+# Código a completar
+promedio_hijos_region <- bikes %>%
+  group_by(___) %>%
+  summarise(Promedio_Hijos = mean(Children, na.rm = TRUE))
+
+print(promedio_hijos_region)
+
+```
+
+**Reto 3**. Calcular la diferencia de ingresos promedio entre géneros.
+
+```r
+# library(dplyr)
+
+# Código a completar
+ingresos_por_genero <- bikes %>%
+  group_by(___) %>%
+  summarise(Ingreso_Medio = mean(Income, na.rm = TRUE))
+
+diferencia_ingresos <- diff(ingresos_por_genero$Ingreso_Medio)
+
+print(diferencia_ingresos)
+
+
+```
+
+**Reto 4**. Filtra el dataset para incluir solo a aquellos con un ingreso superior a $50,000. Calcula y compara el número de personas que compraron y no compraron bicicletas en este grupo de ingresos.
+
+```r
+# Ajusta este umbral según necesites
+umbral_ingresos <- X
+
+compradores_filtrados <- bikes %>%
+  filter(Income > umbral_ingresos) %>%
+  group_by(Purchased_Bike) %>%
+  summarise(Count = n())
+
+print(compradores_filtrados)
+
+```
+
+
+**Reto 5**. Crea una nueva variable categórica basada en la edad, dividiendo a los compradores en grupos de "Joven", "Mediana Edad" y "Senior". Luego, visualiza la distribución de estos grupos de edad entre quienes compraron y no compraron bicicletas.
+
+- Crea la nueva variable de grupo de edad basada en la edad: 0-29 años ("Joven"), 30-59 ("Mediana Edad"), 60+ ("Senior").
+- Usa ggplot2 para crear un gráfico de barras que muestre la cantidad de compradores y no compradores en cada grupo de edad.
+
+```r
+bikes$Age_Group <- cut(bikes$Age, breaks = c(_, _, _, _),
+                             labels = c("Joven", "Mediana Edad", "Senior"))
+
+ggplot(bikes, aes(x = Age_Group, fill = Purchased.Bike)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Compra de Bicicletas por Grupo de Edad", x = "Grupo de Edad", y = "Cantidad") +
+  scale_fill_manual(values = c("No" = "red", "Yes" = "green"))
+
+```
+
+**Reto 6**. Evalúa la correlación entre el número de autos y el ingreso de los compradores de bicicletas. Ajusta el dataset para incluir solo compradores o no compradores y compara las correlaciones.
+
+- Calcula la correlación entre el número de autos y el ingreso para todo el dataset.
+- Repite el cálculo de correlación, pero separa el dataset entre quienes compraron y quienes no compraron bicicletas. Compara estas correlaciones.
+
+```r
+# Correlación para todo el dataset
+cor_total <- cor(bikes$Cars, bikes$Income, use = "complete.obs")
+
+```
+
+```r
+# Correlación para compradores
+cor_compradores <- cor(bikes[bikes$Purchased.Bike == "Yes",]$Cars, 
+                       bikes[bikes$Purchased.Bike == "Yes",]$Income, use = "complete.obs")
+
+```
+
+```r
+# Correlación para no compradores
+cor_no_compradores <- ...
+
+```
+<hr>
+<hr>
+Estos ejercicios te habrán permitido prácticar la limpieza de datos y preparación para análisis posteriores, abordando problemas comunes y técnicas esenciales para cualquier proyecto de ciencia de datos.
