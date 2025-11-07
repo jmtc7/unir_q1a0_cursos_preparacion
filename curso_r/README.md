@@ -1,9 +1,9 @@
 # Curso de Iniciación a R
 Este curso está dividido en las siguientes secciones:
-1. [**Introducción**](1_introducción.md)
+1. [**Introducción**](1_introduccion.md)
    1. Instalación
    2. Utilización Básica
-2. [**Conceptos Básicos**](2_conceptos_básicos.md)
+2. [**Conceptos Básicos**](2_conceptos_basicos.md)
    1. RStudio
    2. Scripts y Proyectos
    3. Biblioteca de R y Paquetes
@@ -13,7 +13,7 @@ Este curso está dividido en las siguientes secciones:
    3. Matrices
    4. Data frames
    5. Arrays
-4. [**Programación Básica**](4_programación_básica.md)
+4. [**Programación Básica**](4_programacion_basica.md)
    1. Operadores y Funciones Matemáticas
    1. Estructuras Condicionales
    2. Estructuras Iterativas
@@ -22,7 +22,7 @@ Este curso está dividido en las siguientes secciones:
    1. Importar Datos R, TXT, CSV, Excel, SAS, SPSS y Stata
    2. Exportar Datos R, TXT, CSV y Excel
    3. Introducción al Tidyverse
-6. [**Visualización de Datos**](6_visualización_de_datos.md)
+6. [**Visualización de Datos**](6_visualizacion_de_datos.md)
    1. Gráficos Básicos con plot() y Superposición de Elementos
    2. Otros Gráficos con hist(), boxplot() y barplot()
    3. Gŕaficos con {GGPlot2}

@@ -338,4 +338,4 @@ Como apunte adicional, `{ggplot2}` ofrece **múltiples [temas](https://ggplot2.t
 
 
 ## 6. Ejercicios (pág. 80)
-En el archivo [actividades/ejercicios_tema6_visualización_de_datos.R](actividades/ejercicios_tema6_visualización_de_datos.R) se incluye la resolución de los 6 ejercicios propuestos en este tema. En el [video 11](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5556e93b-4a16-4df6-aff9-af1f008ca585) se solucionan los ejercicios 1 y 2.
+En el archivo [actividades/ejercicios_tema6_visualizacion_de_datos.R](actividades/ejercicios_tema6_visualizacion_de_datos.R) se incluye la resolución de los 6 ejercicios propuestos en este tema. En el [video 11](https://unir.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5556e93b-4a16-4df6-aff9-af1f008ca585) se solucionan los ejercicios 1 y 2.
