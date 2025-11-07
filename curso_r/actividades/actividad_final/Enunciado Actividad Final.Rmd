@@ -68,7 +68,6 @@ library(forcats)   # Para trabajar con factores (variables categóricas)
 library(tidyverse) # Para manipulación de datos y ggplot2
 library(ggplot2) # Visualización de datos
 library(GGally) # Para visualizaciones más complejas
-
 ```
 
 ```{r}
@@ -143,7 +142,6 @@ bikes$Occupation_Numeric <- as.numeric(factor(bikes$Occupation))
 ```{r}
 # Agrupación de categorías poco frecuentes
 bikes$Education_categorical <- fct_lump_n(bikes$Education, n = 5)
-
 ```
 
 ### Ejercicio 5: Visualización de Datos
@@ -182,7 +180,6 @@ ggplot(data = bikes, aes(x = Income)) +
   geom_histogram(binwidth = 5000, fill = "dodgerblue", color = "black") +
   theme_minimal() +
   labs(title = "Distribución de Ingresos", x = "Ingresos", y = "Frecuencia")
-
 ```
 
 2. **Crear un diagrama de caja para comparar la distribución de edades entre géneros.**
@@ -205,7 +202,6 @@ bikes %>%
     geom_col() +
     theme_minimal() +
     labs(title = "Promedio de Autos por Estado Civil", x = "Estado Civil", y = "Promedio de Autos")
-
 ```
 4. **Visualizar la frecuencia de los niveles educativos entre los compradores de bicicletas.**
 
@@ -216,7 +212,6 @@ ggplot(data = bikes, aes(x = Education)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Nivel Educativo de los Compradores", x = "Nivel Educativo", y = "Frecuencia")
-
 ```
 
 5. **Explorar la relación entre la edad y los ingresos de los compradores de bicicletas con un gráfico de dispersión.**
@@ -227,7 +222,6 @@ ggplot(data = bikes, aes(x = Age, y = Income, color = Gender)) +
   geom_point(alpha = 0.6) +
   theme_minimal() +
   labs(title = "Relación entre Edad e Ingresos", x = "Edad", y = "Ingresos")
-
 ```
 
 
@@ -240,7 +234,6 @@ ggplot(data = bikes, aes(x = Age, y = Income, color = Gender)) +
 # Calcula el ingreso promedio
 ingreso_promedio <- mean(bikes$Income, na.rm = TRUE)
 print(paste("El ingreso promedio es:", ingreso_promedio))
-
 ```
 
 2. **Calcular el ingreso medio por cada nivel educativo.**
@@ -254,7 +247,6 @@ ingreso_medio_educacion <- bikes %>%
   summarise(Ingreso_Medio = mean(Income, na.rm = TRUE))
 
 print(ingreso_medio_educacion)
-
 ```
 
 3. **Encontrar la correlación entre el número de autos y el número de hijos** que tienen los compradores de bicicletas.
@@ -275,65 +267,60 @@ En cada reto, debes editar el formato de la celda para que permita la ejecución
 
 **Reto 1**. Completar el código para calcular y comparar la edad media entre los compradores de bicicletas y los que no compraron.
 
-```r
+```{r}
 # library(dplyr)
 
 # Código a completar
 edad_media_compradores <- bikes %>%
-  filter(Purchased_Bike == "Yes") %>%
-  summarise(Edad_Media = mean(___, na.rm = TRUE))
+  filter(Purchased.Bike == "Yes") %>%
+  summarise(Edad_Media = mean(Age, na.rm = TRUE))
 
 edad_media_no_compradores <- bikes %>%
-  filter(Purchased_Bike == "No") %>%
-  summarise(Edad_Media = mean(___, na.rm = TRUE))
+  filter(Purchased.Bike == "No") %>%
+  summarise(Edad_Media = mean(Age, na.rm = TRUE))
 
 print(edad_media_compradores)
 print(edad_media_no_compradores)
-
 ```
 
 **Reto 2**. Calcular el número promedio de hijos que tienen los compradores de bicicletas, agrupado por región.
 
-```r
+```{r}
 # Código a completar
 promedio_hijos_region <- bikes %>%
-  group_by(___) %>%
+  group_by(Region) %>%
   summarise(Promedio_Hijos = mean(Children, na.rm = TRUE))
 
 print(promedio_hijos_region)
-
 ```
 
 **Reto 3**. Calcular la diferencia de ingresos promedio entre géneros.
 
-```r
+```{r}
 # library(dplyr)
 
 # Código a completar
 ingresos_por_genero <- bikes %>%
-  group_by(___) %>%
+  group_by(Gender) %>%
   summarise(Ingreso_Medio = mean(Income, na.rm = TRUE))
 
 diferencia_ingresos <- diff(ingresos_por_genero$Ingreso_Medio)
 
 print(diferencia_ingresos)
-
-
 ```
 
 **Reto 4**. Filtra el dataset para incluir solo a aquellos con un ingreso superior a $50,000. Calcula y compara el número de personas que compraron y no compraron bicicletas en este grupo de ingresos.
 
-```r
+```{r}
 # Ajusta este umbral según necesites
-umbral_ingresos <- X
+umbral_ingresos <- 50000
 
 compradores_filtrados <- bikes %>%
   filter(Income > umbral_ingresos) %>%
-  group_by(Purchased_Bike) %>%
+  group_by(Purchased.Bike) %>%
   summarise(Count = n())
 
 print(compradores_filtrados)
-
 ```
 
 
@@ -342,15 +329,14 @@ print(compradores_filtrados)
 - Crea la nueva variable de grupo de edad basada en la edad: 0-29 años ("Joven"), 30-59 ("Mediana Edad"), 60+ ("Senior").
 - Usa ggplot2 para crear un gráfico de barras que muestre la cantidad de compradores y no compradores en cada grupo de edad.
 
-```r
-bikes$Age_Group <- cut(bikes$Age, breaks = c(_, _, _, _),
+```{r}
+bikes$Age_Group <- cut(bikes$Age, breaks = c(0, 29, 59, Inf),
                              labels = c("Joven", "Mediana Edad", "Senior"))
 
 ggplot(bikes, aes(x = Age_Group, fill = Purchased.Bike)) +
   geom_bar(position = "dodge") +
   labs(title = "Compra de Bicicletas por Grupo de Edad", x = "Grupo de Edad", y = "Cantidad") +
   scale_fill_manual(values = c("No" = "red", "Yes" = "green"))
-
 ```
 
 **Reto 6**. Evalúa la correlación entre el número de autos y el ingreso de los compradores de bicicletas. Ajusta el dataset para incluir solo compradores o no compradores y compara las correlaciones.
@@ -358,23 +344,21 @@ ggplot(bikes, aes(x = Age_Group, fill = Purchased.Bike)) +
 - Calcula la correlación entre el número de autos y el ingreso para todo el dataset.
 - Repite el cálculo de correlación, pero separa el dataset entre quienes compraron y quienes no compraron bicicletas. Compara estas correlaciones.
 
-```r
+```{r}
 # Correlación para todo el dataset
 cor_total <- cor(bikes$Cars, bikes$Income, use = "complete.obs")
 
-```
-
-```r
 # Correlación para compradores
 cor_compradores <- cor(bikes[bikes$Purchased.Bike == "Yes",]$Cars, 
                        bikes[bikes$Purchased.Bike == "Yes",]$Income, use = "complete.obs")
 
-```
-
-```r
 # Correlación para no compradores
-cor_no_compradores <- ...
+cor_no_compradores <- cor(bikes[bikes$Purchased.Bike == "No",]$Cars, 
+                       bikes[bikes$Purchased.Bike == "No",]$Income, use = "complete.obs")
 
+print(cor_total)
+print(cor_compradores)
+print(cor_no_compradores)
 ```
 <hr>
 <hr>
